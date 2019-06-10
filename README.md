@@ -29,15 +29,15 @@ Menjalankan Aplikasi PILKADES dari HP SmartPhone
 
 Terima kasih
 Konsultasi https://web.facebook.com/jumari.kom
-
+#
 Mau DONASI Dukung Pengembangan Aplikasi atau sekedar membelikan secangkir kopi
 BCA 317 0486 055
 a/n JUMARI
-
+#
 MANDIRI
 14400 16226 760
 a/n JUMARI
-
+#
 PERMATA
 0981 31200 94
 a/n JUMARI
