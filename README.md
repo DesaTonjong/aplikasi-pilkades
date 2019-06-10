@@ -1,4 +1,4 @@
-# aplikasi-pilkades
+# Aplikasi PILKADES
 Aplikasi untuk memudahkan pengelolaan data pemilihan berikut cek kehadiran pada gelar Pemilihan Kepala Desa (PILKADES),
 aplikasi client bisa diakses melalui Browser HP SmartPhone
 
