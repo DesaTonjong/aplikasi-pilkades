@@ -28,3 +28,4 @@ Menjalankan Aplikasi PILKADES dari HP SmartPhone
 2. Klu langkah2 diatas benar, maka akan muncul halaman login
 
 Terima kasih
+Konsultasi https://web.facebook.com/jumari.kom
