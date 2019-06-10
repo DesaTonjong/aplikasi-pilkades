@@ -1,6 +1,20 @@
 # Aplikasi PILKADES
 Aplikasi untuk memudahkan pengelolaan data pemilih berikut cek kehadiran pada gelar Pemilihan Kepala Desa (PILKADES),
-aplikasi client bisa diakses melalui Browser HP SmartPhone
+aplikasi client bisa diakses melalui Browser HP SmartPhone.
+
+log v.1.0.0
+- Data Pemilih
+- Upload
+- Filter Per Dusun dan RT
+- Rekapitulasi Per Dusun dan RT
+- Print Undangan
+- Cek Kehadiran
+- Cek Kehadiran v1
+- Cek Kehadiran v2 Full Screen
+- Data Kehadiran per user
+- Config Aplikasi
+- Config Setting Layout
+- Data User Operator
 
 Cara Installasi
 
@@ -26,6 +40,11 @@ Menjalankan Aplikasi PILKADES
 Menjalankan Aplikasi PILKADES dari HP SmartPhone
 1. Buka Browser ketikan ip_server/pilkades (IP server laptop/PC yg terinstall XAMPP Apache)
 2. Klu langkah2 diatas benar, maka akan muncul halaman login
+
+Login
+
+User Admin : admin@gmail.com
+Password : DesaMaju2019
 
 - Konsultasi https://web.facebook.com/jumari.kom.
 - Mau DONASI Dukung Pengembangan Aplikasi atau sekedar membelikan secangkir kopi.
