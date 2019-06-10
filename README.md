@@ -28,8 +28,8 @@ Menjalankan Aplikasi PILKADES dari HP SmartPhone
 2. Klu langkah2 diatas benar, maka akan muncul halaman login
 
 Terima kasih
-Konsultasi https://web.facebook.com/jumari.kom
-Mau DONASI Dukung Pengembangan Aplikasi atau sekedar membelikan secangkir kopi
+- Konsultasi https://web.facebook.com/jumari.kom.
+- Mau DONASI Dukung Pengembangan Aplikasi atau sekedar membelikan secangkir kopi.
 
 #BCA 317 0486 055
 a/n JUMARI
