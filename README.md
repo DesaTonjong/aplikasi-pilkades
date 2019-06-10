@@ -27,7 +27,6 @@ Menjalankan Aplikasi PILKADES dari HP SmartPhone
 1. Buka Browser ketikan ip_server/pilkades (IP server laptop/PC yg terinstall XAMPP Apache)
 2. Klu langkah2 diatas benar, maka akan muncul halaman login
 
-Terima kasih
 - Konsultasi https://web.facebook.com/jumari.kom.
 - Mau DONASI Dukung Pengembangan Aplikasi atau sekedar membelikan secangkir kopi.
 
@@ -41,3 +40,5 @@ a/n JUMARI
 #PERMATA
 0981 31200 94
 a/n JUMARI
+
+Terima kasih
