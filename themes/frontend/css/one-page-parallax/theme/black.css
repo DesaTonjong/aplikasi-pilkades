@@ -1,0 +1,60 @@
+/*
+Template Name: Color Admin - Responsive Admin Dashboard Template build with Twitter Bootstrap 3 & 4
+Version: 4.2.0
+Author: Sean Ngu
+Website: http://www.seantheme.com/color-admin-v4.2/frontend/one-page-parallax/
+*/
+
+.btn.btn-theme {
+    background: #7e8184;
+    border-color: #7e8184;
+    color: #fff;
+}
+.btn.btn-theme:hover,
+.btn.btn-theme:focus {
+    background: #606265;
+    border-color: #606265;
+}
+.header.navbar .navbar-nav > li.active > a, 
+.header.navbar .navbar-nav > li > a.active, 
+.header.navbar .navbar-nav > li > a:hover, 
+.header.navbar.navbar-default .navbar-nav > li.active > a, 
+.header.navbar.navbar-default .navbar-nav > li > a.active, 
+.header.navbar.navbar-default .navbar-nav > li > a:hover, 
+.header.navbar.navbar-transparent .navbar-nav > li.active > a, 
+.header.navbar.navbar-transparent .navbar-nav > li > a.active, 
+.header.navbar.navbar-transparent .navbar-nav > li > a:hover, 
+.header.navbar.navbar-inverse .navbar-nav > li.active > a, 
+.header.navbar.navbar-inverse .navbar-nav > li > a.active, 
+.header.navbar.navbar-inverse .navbar-nav > li > a:hover, 
+.header.navbar.navbar-transparent.navbar-small .navbar-nav > li.active > a,
+.header.navbar.navbar-transparent.navbar-small .navbar-nav > li > a.active,
+.header.navbar.navbar-transparent.navbar-small .navbar-nav > li > a:hover,
+.text-theme,
+.navbar-nav .dropdown-menu > li.active > a,
+.navbar-nav .dropdown-menu > li > a:hover,
+.navbar-nav .dropdown-menu .dropdown-item:hover, 
+.navbar-nav .dropdown-menu .dropdown-item.active,
+.pricing-table .price .price-number,
+a {
+    color: #7e8184;
+}
+a:hover,
+a:focus {
+    color: #606265;
+}
+.pricing-table .highlight h3,
+.pace-progress {
+    background: #606265;
+}
+.pricing-table .highlight .price {
+    background: #2d353c;
+}
+.pace .pace-activity {
+    border-top-color: #2d353c;
+    border-left-color: #2d353c;
+}
+.brand-logo,
+.footer .footer-brand-logo {
+    border-color: #646b71 #39424a #2b333a;
+}
