@@ -1,8 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+<<<<<<< HEAD
 $config['base_url'] = 'http://'.$_SERVER['HTTP_HOST'].'/pilkades/';
 // $config['base_url'] = 'http://localhost/pilkades/';
+=======
+$config['base_url'] = 'http://localhost/';
+>>>>>>> de5cde22eb6a7834b2354843b38ebf21c1c56d15
 
 /*
 |--------------------------------------------------------------------------
