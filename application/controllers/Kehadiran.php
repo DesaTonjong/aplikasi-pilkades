@@ -48,8 +48,9 @@ class Kehadiran extends CI_Controller {
 	 													array('data_pemilih.no_urut'=> $key_search),0,1, 'pilkades_kehadiran.id ASC');
 	 				if($cek_hadir->num_rows()>0){
 	 					$pemilih 	= $cek_hadir->row();
+	 					$hadir 		= date_create($pemilih->datetime_create);
 	 					echo json_encode(array('sts'=> false, 'msg'=> '<div class="alert alert-pink fade show m-b-10">
-										<span class="close" data-dismiss="alert" onclick="cancel_kehadiran()">×</span><h3><b>'.$pemilih->nama_lengkap. '</b></h3>Nomor Undangan : <b>'. str_pad($key_search, $cfg['dig_no_und'], "0", STR_PAD_LEFT) .'</b><br><h3><span class="text-danger"><b>SUDAH HADIR</b></span></h3>pada jam '. $pemilih->datetime_create .'<br>Melalui : <b>'. $pemilih->operator .'</b></div>'));
+										<span class="close" data-dismiss="alert" onclick="cancel_kehadiran()">×</span><h3><b>'.$pemilih->nama_lengkap. '</b></h3>Nomor Undangan : <b>'. str_pad($key_search, $cfg['dig_no_und'], "0", STR_PAD_LEFT) .'</b><br><h3><span class="text-danger"><b>SUDAH HADIR</b></span></h3>pada jam '. $this->Set->date_time_indo_sort($hadir) .'<br>Melalui : <b>'. $pemilih->operator .'</b></div>'));
 	 					exit;
 	 				}
 
@@ -168,7 +169,7 @@ class Kehadiran extends CI_Controller {
  	{
  		$page 					= $this->input->get('page');
  		$limit 					= 10;
- 		$filter 					= 'pilkades_kehadiran.id_uid='. $this->session->userdata('uid');
+ 		$filter 				= 'pilkades_kehadiran.id_uid='. $this->session->userdata('uid');
  		$total 					= $this->Query->select_where_join3('pilkades_kehadiran', 'data_pemilih', 'dusun', 
  															array(
  																'data_pemilih.id=pilkades_kehadiran.id_pemilih',

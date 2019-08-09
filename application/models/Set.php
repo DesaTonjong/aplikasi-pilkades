@@ -114,9 +114,9 @@ class Set extends CI_Model {
     public function tgl_indo($date){
         $BulanIndo = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
      
-        $tahun = substr($date, 0, 4);
-        $bulan = substr($date, 5, 2);
-        $tgl   = substr($date, 8, 2);
+        $tahun = date_format($date, "Y");
+        $bulan = date_format($date, "m");
+        $tgl   = date_format($date, "d");
      
         $result = $tgl . " " . $BulanIndo[(int)$bulan-1] . " ". $tahun;     
         return $result;
@@ -125,9 +125,9 @@ class Set extends CI_Model {
     public function tgl_indo_sort($date){
         $BulanIndo = array("Jan", "Peb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agust", "Sept", "Okt", "Nov", "Des");
      
-        $tahun = substr($date, 0, 4);
-        $bulan = substr($date, 5, 2);
-        $tgl   = substr($date, 8, 2);
+        $tahun = date_format($date, "Y");
+        $bulan = date_format($date, "m");
+        $tgl   = date_format($date, "d");
      
         $result = $tgl . " " . $BulanIndo[(int)$bulan-1] . " ". $tahun;     
         return $result;
@@ -158,10 +158,9 @@ class Set extends CI_Model {
         if($date!=""){
             $BulanIndo = array("Jan", "Peb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agust", "Sept", "Okt", "Nov", "Des");
 
-            $tahun = substr($date, 0, 4);
-            $bulan = substr($date, 5, 2);
-            $tgl   = substr($date, 8, 2);
-
+            $tahun = date_format($date, "Y");
+            $bulan = date_format($date, "m");
+            $tgl   = date_format($date, "d");
 
             $day = date('D', strtotime($date));
             $dayList = array(
@@ -185,10 +184,10 @@ class Set extends CI_Model {
     public function date_time_indo_sort($date_time){
         $BulanIndo = array("Jan", "Peb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agust", "Sept", "Okt", "Nov", "Des");
      
-        $tahun  = substr($date_time, 0, 4);
-        $bulan  = substr($date_time, 5, 2);
-        $tgl    = substr($date_time, 8, 2);
-        $time   = substr($date_time, 10, 6);
+        $tahun = date_format($date_time, "Y");
+        $bulan = date_format($date_time, "m");
+        $tgl   = date_format($date_time, "d");
+        $time   = date_format($date_time, "H:i:s");
      
         $result = $tgl . " " . $BulanIndo[(int)$bulan-1] . " ". $tahun ." " . $time;     
         return $result;
@@ -197,9 +196,9 @@ class Set extends CI_Model {
     public function bulan_indo($date_time){
         $BulanIndo = array("Januari", "Pebruari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
      
-        $tahun  = substr($date_time, 0, 4);
-        $bulan  = substr($date_time, 5, 2);
-        $tgl    = substr($date_time, 8, 2);
+        $tahun = date_format($date_time, "Y");
+        $bulan = date_format($date_time, "m");
+        $tgl   = date_format($date_time, "d");
      
         $result = array($BulanIndo[(int)$bulan-1],  $tahun);     
         return $result;
