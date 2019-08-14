@@ -52,5 +52,11 @@
 <?php if(isset($rekap_hadir)){  ?>
 	<script src="<?php echo $base_url_int.$rekap_hadir;?>"></script>
 <?php } ?>
+<?php if(isset($set_dapil)){  ?>
+	<script src="<?php echo $base_url_int.$set_dapil;?>"></script>
+<?php } ?>
+<?php if(isset($set_cakades)){  ?>
+	<script src="<?php echo $base_url_int.$set_cakades;?>"></script>
+<?php } ?>
 </body>
 </html>

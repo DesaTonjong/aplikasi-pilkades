@@ -14,7 +14,7 @@ class Kehadiran extends CI_Controller {
 
  	public function index()
  	{
- 		$uid 						= $this->session->userdata('uid');
+ 		$uid 				= $this->session->userdata('uid');
  		$data['kehadiran']	= $this->Query->select_where_join3('pilkades_kehadiran', 'data_pemilih', 'dusun', 
  															array(
  																'data_pemilih.id=pilkades_kehadiran.id_pemilih',

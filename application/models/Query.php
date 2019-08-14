@@ -3,15 +3,18 @@
 class Query extends CI_Model {
 
   	public function insertData($table, $data){
-    	$this->db->insert($table, $data);
+    	$response = $this->db->insert($table, $data);
+        return $response;
   	}
 
   	public function updateData($table, $data, $where){
-    	$this->db->update($table, $data, $where);
+    	$response = $this->db->update($table, $data, $where);
+        return $response;
   	}
 
   	public function deleteData($table, $where){
-    	$this->db->delete($table, $where);
+    	$response = $this->db->delete($table, $where);
+        return $response;
   	}
 
     public function select_where($table, $select, $where, $start, $limit, $order_by){

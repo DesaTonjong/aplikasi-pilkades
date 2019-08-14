@@ -90,13 +90,13 @@
 						if($rkp->num_rows()>0){
 							$hadir 	= $rkp->row();
 
-							$hdr_lk 	= $hadir->jml_lk; 
-							$hdr_pr 	= $hadir->jml_pr; 
-							$jumlah 	= $hadir->jumlah; 
+							$hdr_lk 	= ($hadir->jml_lk!=0) ? intval($hadir->jml_lk):0; 
+							$hdr_pr 	= ($hadir->jml_pr!=0) ? intval($hadir->jml_pr):0; 
+							$jumlah 	= ($hadir->jumlah!=0) ? intval($hadir->jumlah):0; 
 
-							$tot_lk_hdr		= $tot_lk_hdr+$hadir->jml_lk;
-							$tot_pr_hdr		= $tot_pr_hdr+$hadir->jml_pr;
-							$tot_jml_hdr	= $tot_jml_hdr+$hadir->jumlah;
+							$tot_lk_hdr		= $tot_lk_hdr + $hdr_lk;
+							$tot_pr_hdr		= $tot_pr_hdr + $hdr_pr;
+							$tot_jml_hdr	= $tot_jml_hdr + $jumlah;
 
 							$pros_lk 		= number_format(($hdr_lk/$row['jml_lk'])*100,2).' %'; 
 							$pros_pr 		= number_format(($hdr_pr/$row['jml_pr'])*100,2).' %'; 
@@ -119,8 +119,8 @@
 							<td class="text-right bg-black-transparent-8 text-grey"><b><?php echo number_format($tot_lk);?></b></td>
 							<td class="text-right bg-black-transparent-8 text-grey"><b><?php echo number_format($tot_pr);?></b></td>
 							<td class="text-right bg-black-transparent-8 text-grey"><b><?php echo number_format($tot_jml);?></b></td>
-							<td class="text-right bg-black-transparent-8 text-grey"><span class="" title="<?php echo number_format(($tot_lk_hdr/$tot_lk)*100,2).' %';?>"><b><?php echo number_format($tot_lk_hdr);?></b></span></td>
-							<td class="text-right bg-black-transparent-8 text-grey"><b><span class="" title="<?php echo number_format(($tot_pr_hdr/$tot_pr)*100,2).' %';?>"><?php echo number_format($tot_pr_hdr);?></b></span></td>
+							<td class="text-right bg-black-transparent-8 text-grey"><span class="" title="<?php echo ($tot_lk>0) ? number_format(($tot_lk_hdr/$tot_lk)*100,2) : 0 .' %';?>"><b><?php echo number_format($tot_lk_hdr);?></b></span></td>
+							<td class="text-right bg-black-transparent-8 text-grey"><b><span class="" title="<?php echo ($tot_pr>0) ? number_format(($tot_pr_hdr/$tot_pr)*100,2) : 0 .' %';?>"><?php echo number_format($tot_pr_hdr);?></b></span></td>
 							<td class="text-right bg-black-transparent-8 text-grey"><b><?php echo number_format($tot_jml_hdr);?></b></td>
 							<td class="text-right bg-black-transparent-8 text-grey"><b><?php echo number_format(($tot_jml_hdr/$tot_jml)*100,2).' %';?></b></td>
 						</tr>

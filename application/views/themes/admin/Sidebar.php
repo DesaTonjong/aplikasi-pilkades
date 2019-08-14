@@ -27,6 +27,8 @@
 				<ul class="nav nav-profile">
 					<li><a href="#ModalConfig" data-toggle="modal" onclick="get_config()"><i class="fa fa-cog"></i> Settings</a></li>
 					<li><a href="#ModalConfig" data-toggle="modal" onclick="get_user_oper()" ><i class="fa fa-user"></i> User Operator</a></li>
+					<li><a href="<?php echo $base_url_int. 'dashboard?p=set_dapil';?>"><i class="fa fa-user"></i> Setting Dapil</a></li>
+					<li><a href="<?php echo $base_url_int. 'dashboard?p=set_cakades';?>"><i class="fa fa-users"></i> Setting Cakades</a></li>
 					<!--
 						<li><a href="javascript:;"><i class="fa fa-question-circle"></i> Helps</a></li>
 					-->
@@ -75,14 +77,9 @@
 					<?php if(isset($akses['oprpilkades'])) { ?>
 					<li class=" <?php if($aktif=='cek_hadir'){ echo 'active';}?>"><a href="<?php echo $base_url_int.'kehadiran';?>">Cek Kehadiran</a></li>
 					<?php } ?>
-					<!--
-					<?php if(isset($akses['adminpilkades'])) { ?>
-						<li class=" <?php if($aktif=='set_hitung'){ echo 'active';}?>"><a href="<?php echo $base_url_int. 'dashboard?p=set_hitung';?>">Setting Penghitungan</a></li>
-					<?php } ?>
-					<?php //if(isset($akses['oprhitung'])) { ?>
+					<?php if(isset($akses['oprhitung'])) { ?>
 					<li class=" <?php if($aktif=='opr_hitung'){ echo 'active';}?>"><a href="<?php echo $base_url_int.'dashboard?p=opr_hitung';?>">Penghitungan</a></li>
-					<?php //} ?>
-				-->
+					<?php } ?>
 				</ul>
 			</li>
 			

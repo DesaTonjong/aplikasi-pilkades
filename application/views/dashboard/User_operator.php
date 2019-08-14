@@ -29,6 +29,8 @@
 							$rules .= '<span class="badge badge-primary">Data Pemilih</span> ';
 						}else if($row==4){
 							$rules .= '<span class="badge badge-purple">Cek Kehadiran</span> ';
+						}else if($row==5){
+							$rules .= '<span class="badge badge-pink">Penghitungan</span> ';
 						}
 					}
 				?>

@@ -24,7 +24,51 @@ function show_upload_pemilih() {
 	}
 }
 
+get_rekap_dapil();
 get_data(0);
+get_pot_ganda();
+
+function get_rekap_dapil() {
+	var dapil_id = $("#dapil_id_filter option:selected").val();
+	$.get(base_url + "data_pemilih/get_rekap_dapil", {
+		'dapil_id': dapil_id
+	}, function (data) {
+		$("#rekap_dapil_root").html(data);
+	});
+}
+
+function get_pot_ganda() {
+	var pot_ganda_filter = $("#pot_ganda_filter option:selected").val();
+	$.get(base_url + "data_pemilih/get_pot_ganda", {
+		'id_filter': pot_ganda_filter
+	}, function (data) {
+		$("#pot_ganda_root").html(data);
+	});
+}
+
+function get_ganda_name(filter) {
+	$.get(base_url + "data_pemilih/get_ganda_name", {
+		'filter': filter
+	}, function (data) {
+		$("#result_ganda").html(data);
+	});
+}
+
+function get_ganda_nik(filter) {
+	$.get(base_url + "data_pemilih/get_ganda_nik", {
+		'filter': filter
+	}, function (data) {
+		$("#result_ganda").html(data);
+	});
+}
+
+function get_ganda_tgl_lahir(filter) {
+	$.get(base_url + "data_pemilih/get_ganda_tgl_lahir", {
+		'filter': filter
+	}, function (data) {
+		$("#result_ganda").html(data);
+	});
+}
 
 function get_data(page) {
 	if (page == 0) {
@@ -375,5 +419,31 @@ function remove_data_pemilih() {
 
 		}
 	});
-
 }
+
+function set_dapil(id_dapil, id_dusun, rt, rw) {
+	$.get(base_url + "data_pemilih/set_dapil", {
+		'id_dapil': id_dapil,
+		'id_dusun': id_dusun,
+		'rt': rt,
+		'rw': rw,
+	}, function (data) {
+		$("#data_content_sm").html(data);
+	});
+}
+
+$(document).on('submit', '#form_set_dapil_update', function (e) {
+	e.preventDefault();
+	var form = $("#form_set_dapil_update");
+	$.post(base_url + "data_pemilih/set_dapil_update", form.serialize(), function (json) {
+		if (json.sts == true) {
+			if(json.data.id_dapil!=json.data.id_dapil_new){
+				$("#row" + json.data.id_dapil + json.data.id_dusun + json.data.rt + json.data.rw).fadeOut();
+			}
+			$("#ModalFormSM").modal('hide');
+		} else {
+			alert(json.msg);
+		}
+	}, 'json');
+	return false;
+});

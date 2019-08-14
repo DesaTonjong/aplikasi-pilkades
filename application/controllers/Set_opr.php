@@ -36,15 +36,15 @@ class Set_opr extends CI_Controller {
 		$this->form_validation->set_rules('email_login_user','', 'required|trim');
 		$this->form_validation->set_rules('password_login_user','', 'required|trim');
 		if($this->form_validation->run()==true){
-			$nama_depan 					= $this->input->post('nama_depan');
-			$nama_belakang 				= $this->input->post('nama_belakang');
-			$email_login 					= $this->input->post('email_login_user');
-			$password_login 				= $this->input->post('password_login_user');
-			$data_pemilih 					= $this->input->post('data_pemilih');
-			$cek_kehadiran 				= $this->input->post('cek_kehadiran');
+			$nama_depan 		= $this->input->post('nama_depan');
+			$nama_belakang 	= $this->input->post('nama_belakang');
+			$email_login 		= $this->input->post('email_login_user');
+			$password_login 	= $this->input->post('password_login_user');
+			$data_pemilih 		= $this->input->post('data_pemilih');
+			$cek_kehadiran 	= $this->input->post('cek_kehadiran');
 
-			$akses 			= '';
-			$rules_akses 	= '';
+			$akses 				= '';
+			$rules_akses 		= '';
 			if(isset($data_pemilih)){
 				$akses 			.= '<span class="badge badge-primary">Data Pemilih</span> ';
 				$rules_akses 	.= ','.$data_pemilih;
@@ -103,6 +103,7 @@ class Set_opr extends CI_Controller {
 			$email_login 				= $this->input->post('email_login_user');
 			$data_pemilih 				= $this->input->post('data_pemilih');
 			$cek_kehadiran 			= $this->input->post('cek_kehadiran');
+			$penghitungan 			= $this->input->post('penghitungan');
 			$password 					= $this->input->post('password_login_user');
 
 			$akses 			= '';
@@ -114,6 +115,10 @@ class Set_opr extends CI_Controller {
 			if(isset($cek_kehadiran)){
 				$akses 			.= '<span class="badge badge-purple">Cek Kehadiran</span> ';
 				$rules_akses 	.= ','.$cek_kehadiran;
+			}
+			if(isset($penghitungan)){
+				$akses 			.= '<span class="badge badge-pink">Cek Kehadiran</span> ';
+				$rules_akses 	.= ','.$penghitungan;
 			}
 			$rules_akses = substr($rules_akses, 1);
 

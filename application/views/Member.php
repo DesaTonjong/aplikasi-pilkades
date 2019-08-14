@@ -56,18 +56,51 @@
 					$scripts['set_hitung'] 		= 'assets/js/kegiatan.js';
 					$this->load->view('dashboard/kegiatan/Kegiatan_index.php');
 				}
+				if($page_active=='set_dapil'){
+					$scripts['dashboard'] 		= true;
+					$scripts['set_dapil'] 		= 'assets/js/set_dapil.js';
+					$this->load->view('dashboard/config/Set_dapil_index.php');
+				}
+				if($page_active=='set_cakades'){
+					$scripts['dashboard'] 		= true;
+					$scripts['set_cakades'] 	= 'assets/js/set_cakades.js';
+					$this->load->view('dashboard/config/Set_cakades_index.php');
+				}
 			?>
 		</div>
 		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
 	</div>
 
-<div class="modal fade" id="ModalConfig">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-    	<div class="modal-content">
-			<div id="data_config"></div>
-		</div>		
-  </div>
-</div>
+	<div class="modal fade" id="ModalConfig">
+	    <div class="modal-dialog modal-lg modal-dialog-centered">
+	    	<div class="modal-content">
+				<div id="data_config"></div>
+			</div>		
+	  </div>
+	</div>
+
+	<div class="modal fade" id="ModalForm">
+		<div class="modal-dialog modal-lg modal-dialog-centered">
+			<div class="modal-content">
+				<div id="data_content"></div>
+			</div>		
+		</div>
+	</div>
+
+	<div class="modal fade" id="ModalFormMid">
+		<div class="modal-dialog modal-md modal-dialog-centered">
+			<div class="modal-content">
+				<div id="data_content_mid"></div>
+			</div>		
+		</div>
+	</div>
+	<div class="modal fade" id="ModalFormSM">
+		<div class="modal-dialog modal-sm modal-dialog-centered">
+			<div class="modal-content">
+				<div id="data_content_sm"></div>
+			</div>		
+		</div>
+	</div>
 <?php 
 	$this->load->view('themes/admin/Footer', $scripts);
 ?>

@@ -20,6 +20,44 @@ class Data_pemilih extends CI_Controller {
 
 	}
 
+	public function get_rekap_dapil()
+	{
+		$dapil_id	 	= $this->input->get('dapil_id');
+		$data['rekap']	= $this->Query->select_where_join2_group_by('data_pemilih', 'dusun', 
+									'dusun.uid=data_pemilih.id_dusun', 
+									array('data_pemilih.id_dapil', 'data_pemilih.id_dusun', 'dusun.dusun', 'data_pemilih.rw', 'data_pemilih.rt',
+									'MIN(data_pemilih.no_urut) as start',
+									'MAX(data_pemilih.no_urut) as end',
+									'SUM(IF(data_pemilih.lp=1,1,0)) as jml_lk',
+									'SUM(IF(data_pemilih.lp=2,1,0)) as jml_pr',
+									'COUNT(data_pemilih.id) as total',
+									),
+									array('dusun.dusun', 'data_pemilih.rw', 'data_pemilih.rt'),
+									'data_pemilih.aktif=1 AND data_pemilih.id_dapil='.$dapil_id,
+									0, 60, 'data_pemilih.id_dusun, data_pemilih.rw, data_pemilih.rt ASC')->result_array();
+		$this->load->view('dashboard/data_pemilih/Rekap_dapil', $data);
+	}
+
+	public function get_pot_ganda()
+	{
+		$id_filter	 			= $this->input->get('id_filter');
+		$data['id_filter'] 	= $id_filter;
+		$data['filter'] 		= 'NAMA LENGKAP';
+
+		if($id_filter==1){
+			$query 		= 'SELECT `nama_lengkap`, COUNT(id) as jml FROM `data_pemilih`  GROUP BY LOWER(`nama_lengkap`) HAVING COUNT(id) > 1 ORDER BY COUNT(id) DESC, LOWER(`nama_lengkap`), `data_pemilih`.`rw`, `data_pemilih`.`rt` ASC LIMIT 500';
+			$data['filter'] = 'NAMA LENGKAP';
+		}else if($id_filter==2){
+			$query 		= 'SELECT `nik`, COUNT(id) as jml FROM `data_pemilih`  GROUP BY `nik` HAVING COUNT(id) > 1 ORDER BY COUNT(id) DESC, `data_pemilih`.`rw`, `data_pemilih`.`rt` ASC LIMIT 500';
+			$data['filter'] = 'NIK';
+		}else if($id_filter==3){
+			$query 		= 'SELECT `tgl_lahir`, COUNT(id) as jml FROM `data_pemilih`  GROUP BY `tgl_lahir` HAVING COUNT(id) > 1 ORDER BY COUNT(id) DESC, `tgl_lahir`, `data_pemilih`.`rw`, `data_pemilih`.`rt` ASC LIMIT 500';
+			$data['filter'] = 'TANGGAL LAHIR';
+		}
+		$data['rekap']	= $this->db->query($query)->result_array();
+		$this->load->view('dashboard/data_pemilih/Pot_ganda', $data);
+	}
+
 	public function get_data()
 	{
 		$key_search = $this->input->get('key_search');
@@ -110,6 +148,69 @@ class Data_pemilih extends CI_Controller {
 
 		$filter_result = '<span>' . $filt_data . '</span>';
 		echo json_encode(array('sts'=>true, 'filter'=> $filter_result, 'rekap'=> $rekap, 'data'=> $tr_row, 'id_dusun'=> $id_dusun, 'rt'=> $rt, 'rw'=> $rw));
+	}
+
+	public function get_ganda_name()
+	{
+		$filter 				= $this->input->get('filter');
+		$data['result']   = $this->Query->select_where_join2('data_pemilih', 'dusun', 'dusun.uid=data_pemilih.id_dusun', 
+														array('data_pemilih.id', 'data_pemilih.no_urut', 'data_pemilih.nik', 'data_pemilih.nokk', 'data_pemilih.nama_lengkap', 'data_pemilih.tmp_lahir', 'data_pemilih.tgl_lahir', 'dusun.dusun', 'IF(data_pemilih.lp=1,"L","P") as lp','data_pemilih.rt', 'data_pemilih.rw', 'IF(data_pemilih.sts_nikah=0,"BELUM", IF(data_pemilih.sts_nikah=1,"SUDAH","PERNAH"))as sts_nkh'),
+														array('nama_lengkap'=> $filter),
+														0, 200, 'data_pemilih.id_dusun, data_pemilih.rw, data_pemilih.rt ASC');
+		$this->load->view('dashboard/data_pemilih/Result_ganda_by_name', $data);
+	}
+
+	public function get_ganda_nik()
+	{
+		$filter 				= $this->input->get('filter');
+		$data['result']   = $this->Query->select_where_join2('data_pemilih', 'dusun', 'dusun.uid=data_pemilih.id_dusun', 
+														array('data_pemilih.id', 'data_pemilih.no_urut', 'data_pemilih.nik', 'data_pemilih.nokk', 'data_pemilih.nama_lengkap', 'data_pemilih.tmp_lahir', 'data_pemilih.tgl_lahir', 'dusun.dusun', 'IF(data_pemilih.lp=1,"L","P") as lp','data_pemilih.rt', 'data_pemilih.rw', 'IF(data_pemilih.sts_nikah=0,"BELUM", IF(data_pemilih.sts_nikah=1,"SUDAH","PERNAH"))as sts_nkh'),
+														array('nik'=> $filter),
+														0, 200, 'data_pemilih.id_dusun, data_pemilih.rw, data_pemilih.rt ASC');
+		$this->load->view('dashboard/data_pemilih/Result_ganda_by_name', $data);
+	}
+
+	public function get_ganda_tgl_lahir()
+	{
+		$filter 				= $this->input->get('filter');
+		$data['result']   = $this->Query->select_where_join2('data_pemilih', 'dusun', 'dusun.uid=data_pemilih.id_dusun', 
+														array('data_pemilih.id', 'data_pemilih.no_urut', 'data_pemilih.nik', 'data_pemilih.nokk', 'data_pemilih.nama_lengkap', 'data_pemilih.tmp_lahir', 'data_pemilih.tgl_lahir', 'dusun.dusun', 'IF(data_pemilih.lp=1,"L","P") as lp','data_pemilih.rt', 'data_pemilih.rw', 'IF(data_pemilih.sts_nikah=0,"BELUM", IF(data_pemilih.sts_nikah=1,"SUDAH","PERNAH"))as sts_nkh'),
+														array('tgl_lahir'=> $filter),
+														0, 200, 'data_pemilih.id_dusun, data_pemilih.rw, data_pemilih.rt ASC');
+		$this->load->view('dashboard/data_pemilih/Result_ganda_by_name', $data);
+	}
+
+	public function set_dapil()
+	{
+		$data['id_dapil'] 		= $this->input->get('id_dapil');
+		$data['id_dusun'] 		= $this->input->get('id_dusun');
+		$data['rt'] 				= $this->input->get('rt');
+		$data['rw'] 				= $this->input->get('rw');
+		$data['dapil'] = $this->Query->select_where('pilkades_dapil', array('*'), array(), 0, 15, 'dapil ASC');
+		$this->load->view('dashboard/data_pemilih/Set_dapil', $data);
+	}
+
+	public function set_dapil_update($value='')
+	{
+		$this->form_validation->set_rules('id_dapil', 'DAPIL', 'required|trim');
+		$this->form_validation->set_rules('id_dapil_new', 'DAPIL', 'required|trim');
+		$this->form_validation->set_rules('rt', 'RT', 'required|trim');
+		$this->form_validation->set_rules('rw', 'RW', 'required|trim');
+		$this->form_validation->set_rules('id_dusun', 'DUSUN', 'required|trim');
+		if($this->form_validation->run()==true){
+			$id_dapil 		= $this->input->post('id_dapil');
+			$id_dapil_new 	= $this->input->post('id_dapil_new');
+			$rt 				= $this->input->post('rt');
+			$rw 				= $this->input->post('rw');
+			$id_dusun 		= $this->input->post('id_dusun');
+			$data = array('id_dapil_new'=> $id_dapil_new, 'id_dapil'=> $id_dapil, 'rt'=> $rt, 'rw' => $rw, 'id_dusun'=> $id_dusun);
+			$this->Query->updateData('data_pemilih', 
+							array('id_dapil'=> $id_dapil_new), 
+							array('rt'=> $rt, 'rw' => $rw, 'id_dusun'=> $id_dusun));
+			echo json_encode(array('sts'=> true, 'data'=> $data));
+		}else{
+			echo json_encode(array('sts'=> false, 'msg'=> validation_errors()));
+		}
 	}
 
 	public function get_form_add()

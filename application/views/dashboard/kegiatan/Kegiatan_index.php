@@ -44,19 +44,3 @@
 		<div id="data_kegiatan_root" class=""></div>
 	</div>
 </div>
-
-<div class="modal fade" id="ModalFormSM">
-    <div class="modal-dialog modal-sm modal-dialog-centered">
-    	<div class="modal-content">
-			<div id="data_content_sm"></div>
-		</div>		
-  </div>
-</div>
-
-<div class="modal fade" id="ModalForm">
-    <div class="modal-dialog modal-md modal-dialog-centered">
-    	<div class="modal-content">
-			<div id="data_content"></div>
-		</div>		
-  </div>
-</div>

@@ -13,12 +13,12 @@
 		<div class="panel-heading-btn">
 			<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
 		</div>
-		<h4 class="panel-title title_panel">Setting Penghitungan</h4>
+		<h4 class="panel-title title_panel">Data Setting</h4>
 	</div>
 	<div class="panel-body panel_data_body">
 		<div class="row">
 			<div class="col-lg-4">
-				<div id="data_tps"></div>
+				<div id="data_dapil"></div>
 			</div>
 			<div class="col-lg-8">
 				<div id="data_calon"></div>

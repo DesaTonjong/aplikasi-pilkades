@@ -103,18 +103,50 @@
 				</p>
 			</div>
 		</div>
-
+		<?php 
+			$perangkat 		= $this->Query->select_where_join2('data_panitia', 'data_panitia_jab', 
+								'data_panitia_jab.id=data_panitia.id_jab',
+								array('data_panitia.*', 'data_panitia_jab.jab'),
+								array('id_jab'=>2), 0, 100, 'data_panitia.sort, data_panitia.id ASC'
+								);
+			$bpd 				= $this->Query->select_where_join2('data_panitia', 'data_panitia_jab', 
+											'data_panitia_jab.id=data_panitia.id_jab',
+											array('data_panitia.*', 'data_panitia_jab.jab'),
+											array('id_jab'=>1), 0, 100, 'data_panitia.sort, data_panitia.id ASC'
+											);
+			$panitia_inti = $this->Query->select_where_join2('data_panitia', 'data_panitia_jab', 
+								'data_panitia_jab.id=data_panitia.id_jab',
+								array('data_panitia.*', 'data_panitia_jab.jab'),
+								array('id_jab'=>3), 0, 100, 'data_panitia.sort, data_panitia.id ASC'
+								);
+			$panitia_gastarlih = $this->Query->select_where_join2('data_panitia', 'data_panitia_jab', 
+												'data_panitia_jab.id=data_panitia.id_jab',
+												array('data_panitia.*', 'data_panitia_jab.jab'),
+												array('id_jab'=>4), 0, 100, 'data_panitia.sort, data_panitia.ket, data_panitia.nama ASC'
+												);
+			$bumdes_tim 	= $this->Query->select_where_join2('data_panitia', 'data_panitia_jab', 
+												'data_panitia_jab.id=data_panitia.id_jab',
+												array('data_panitia.*', 'data_panitia_jab.jab'),
+												array('id_jab'=>5), 0, 100, 'data_panitia.sort, data_panitia.ket, data_panitia.nama ASC'
+												);
+			$data_pemilih 	= $this->Query->select_where_join2_group_by('data_pemilih', 'dusun', 'dusun.uid=data_pemilih.id_dusun',
+																	array('dusun.dusun',
+		                                        	'SUM(IF(data_pemilih.lp=1,1,0)) as jml_lk',
+		                                        	'SUM(IF(data_pemilih.lp=2,1,0)) as jml_pr',
+		                                        	'COUNT(data_pemilih.id) as jumlah',),
+																	array('dusun.dusun'),
+																	array(),0,30, 'dusun.uid ASC'
+																);
+			$berkas 			= $this->Query->select_where('berkas', array('*'),array(), 0,10, 'title ASC');
+			$dok_kegiatan 	= $this->Query->select_where('pilkades_kegiatan', array('*'), array(), 0, 36, 'id DESC');
+		?>
+		<?php if($perangkat->num_rows()>0){ ?>
 		<div id="perangkat" class="content bg-silver-lighter" data-scrollview="true">
 			<div class="container">
 				<h2 class="content-title">Perangkat Desa, <?php echo $sis_pem . ' '. $desa;?></h2>
 				<div class="row">
 					<?php 
-						$data = $this->Query->select_where_join2('data_panitia', 'data_panitia_jab', 
-											'data_panitia_jab.id=data_panitia.id_jab',
-											array('data_panitia.*', 'data_panitia_jab.jab'),
-											array('id_jab'=>2), 0, 100, 'data_panitia.sort, data_panitia.id ASC'
-											);
-						foreach ($data->result_array() as $key => $value) {
+						foreach ($perangkat->result_array() as $key => $value) {
 					?>
 						<div class="col-md-4 col-sm-12">
 							<div class="team p-l-10 p-r-10">
@@ -131,17 +163,14 @@
 				</div>
 			</div>
 		</div>
+		<?php } ?>
+		<?php if($perangkat->num_rows()>0){ ?>
 		<div id="bpd" class="content" data-scrollview="true">
 			<div class="container">
 				<h2 class="content-title">BPD <?php echo $sis_pem . ' '. $desa;?></h2>
 				<div class="row">
 					<?php 
-						$data = $this->Query->select_where_join2('data_panitia', 'data_panitia_jab', 
-											'data_panitia_jab.id=data_panitia.id_jab',
-											array('data_panitia.*', 'data_panitia_jab.jab'),
-											array('id_jab'=>1), 0, 100, 'data_panitia.sort, data_panitia.id ASC'
-											);
-						foreach ($data->result_array() as $key => $value) {
+						foreach ($bpd->result_array() as $key => $value) {
 					?>
 						<div class="col-md-4 col-sm-12">
 							<div class="team p-l-10 p-r-10">
@@ -158,7 +187,8 @@
 				</div>
 			</div>
 		</div>
-
+		<?php } ?>
+		<?php if($panitia_inti->num_rows()>0){ ?>
 		<div id="sk_panitia" class="content bg-silver-lighter" data-scrollview="true">
 			<div class="container">
 				<h2 class="content-title">Panitia PILKADES <?php echo $sis_pem . ' '. $desa;?></h2>
@@ -167,12 +197,7 @@
 				</p>
 				<div class="row">
 					<?php 
-						$data = $this->Query->select_where_join2('data_panitia', 'data_panitia_jab', 
-											'data_panitia_jab.id=data_panitia.id_jab',
-											array('data_panitia.*', 'data_panitia_jab.jab'),
-											array('id_jab'=>3), 0, 100, 'data_panitia.sort, data_panitia.id ASC'
-											);
-						foreach ($data->result_array() as $key => $value) {
+						foreach ($panitia_inti->result_array() as $key => $value) {
 					?>
 						<div class="col-md-4 col-sm-12">
 							<div class="team p-l-10 p-r-10">
@@ -189,17 +214,15 @@
 				</div>
 			</div>
 		</div>
+		<?php } ?>
+		<?php if($panitia_gastarlih->num_rows()>0){ ?>
 		<div id="gastarlih" class="content" data-scrollview="true">
 			<div class="container">
 				<h2 class="content-title">Petugas Pendaftaran Pemilih</h2>
 				<div class="row">
 						<?php 
-							$data = $this->Query->select_where_join2('data_panitia', 'data_panitia_jab', 
-												'data_panitia_jab.id=data_panitia.id_jab',
-												array('data_panitia.*', 'data_panitia_jab.jab'),
-												array('id_jab'=>4), 0, 100, 'data_panitia.sort, data_panitia.ket, data_panitia.nama ASC'
-												);
-							foreach ($data->result_array() as $key => $value) {
+							
+							foreach ($panitia_gastarlih->result_array() as $key => $value) {
 						?>
 					<div class="col-md-3 col-sm-12">
 						<div class="team p-l-10 p-r-10">
@@ -216,17 +239,15 @@
 			</div>
 		</div>
 	</div>
+		<?php } ?>
+		<?php if($bumdes_tim->num_rows()>0){ ?>
 		<div id="bumdes" class="content" data-scrollview="true">
 			<div class="container">
 				<h2 class="content-title">TIM BUMDES GUNUNG MULIA, <?php echo $sis_pem . ' '. $desa;?></h2>
 				<div class="row">
 						<?php 
-							$data = $this->Query->select_where_join2('data_panitia', 'data_panitia_jab', 
-												'data_panitia_jab.id=data_panitia.id_jab',
-												array('data_panitia.*', 'data_panitia_jab.jab'),
-												array('id_jab'=>5), 0, 100, 'data_panitia.sort, data_panitia.ket, data_panitia.nama ASC'
-												);
-							foreach ($data->result_array() as $key => $value) {
+							
+							foreach ($bumdes_tim->result_array() as $key => $value) {
 						?>
 					<div class="col-md-3 col-sm-12">
 						<div class="team p-l-10 p-r-10">
@@ -243,7 +264,8 @@
 			</div>
 		</div>
 	</div>
-
+		<?php } ?>
+		<?php if($data_pemilih->num_rows()>0){ ?>
 		<div id="cek_pemilih" class="content bg-silver-lighter" data-scrollview="true">
 			<!-- begin container -->
 			<div class="container">
@@ -283,16 +305,9 @@
 							</thead>
 							<tbody>
 								<?php 
-									$rkp 	= $this->Query->select_where_join2_group_by('data_pemilih', 'dusun', 'dusun.uid=data_pemilih.id_dusun',
-																	array('dusun.dusun',
-		                                        	'SUM(IF(data_pemilih.lp=1,1,0)) as jml_lk',
-		                                        	'SUM(IF(data_pemilih.lp=2,1,0)) as jml_pr',
-		                                        	'COUNT(data_pemilih.id) as jumlah',),
-																	array('dusun.dusun'),
-																	array(),0,30, 'dusun.uid ASC'
-																);
+									
 									$i=1;	$tot_p=0;$tot_l=0;$total=0;
-									foreach ($rkp->result_array() as $key => $value) { ?>
+									foreach ($data_pemilih->result_array() as $key => $value) { ?>
 								<tr>
 									<td><?php echo $i;?></td>
 									<td><?php echo $value['dusun'];?></td>
@@ -320,12 +335,13 @@
 				</div>
 			</div>
 		</div>
+		<?php } ?>
+		<?php if($berkas->num_rows()>0){ ?>
 		<div id="video" class="content" data-scrollview="true">
 			<div class="container" data-animation="true" data-animation-type="fadeInDown">
 				<div class="row text-center">
 					<?php 
-						$get = $this->Query->select_where('berkas', array('*'),array(), 0,10, 'title ASC');
-						foreach ($get->result_array() as $key => $value) {
+						foreach ($berkas->result_array() as $key => $value) {
 					?>
 					<div class="col-md-3" data-animation="true" data-animation-type="fadeInRight">
 						<a href="<?php echo base_url('assets/berkas/'.$value['filename']);?> ">
@@ -350,6 +366,8 @@
 				</div>
 			</div>
 		</div>
+		<?php } ?>
+		<?php if($dok_kegiatan->num_rows()>0){ ?>
 
 		<div id="kegiatan" class="content" data-scrollview="true">
 			<div class="container" data-animation="true" data-animation-type="fadeInDown">
@@ -359,8 +377,8 @@
 				</p>
 				<div class="row row-space-10">
 					<?php 
-						$get 	= $this->Query->select_where('pilkades_kegiatan', array('*'), array(), 0, 36, 'id DESC');
-						foreach ($get->result_array() as $key => $value) { ?>
+						
+						foreach ($dok_kegiatan->result_array() as $key => $value) { ?>
 							<div class="col-md-4 col-sm-6">
 								<div class="work">
 									<div class="image">
@@ -377,6 +395,7 @@
 			</div>
 		</div>
 		
+		<?php } ?>
 		
 		<div id="footer" class="footer">
 			<div class="container">
