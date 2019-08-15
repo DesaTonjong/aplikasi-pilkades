@@ -45,13 +45,13 @@ class Data_pemilih extends CI_Controller {
 		$data['filter'] 		= 'NAMA LENGKAP';
 
 		if($id_filter==1){
-			$query 		= 'SELECT `nama_lengkap`, COUNT(id) as jml FROM `data_pemilih`  GROUP BY LOWER(`nama_lengkap`) HAVING COUNT(id) > 1 ORDER BY COUNT(id) DESC, LOWER(`nama_lengkap`), `data_pemilih`.`rw`, `data_pemilih`.`rt` ASC LIMIT 500';
+			$query 		= 'SELECT `nama_lengkap`, COUNT(id) as jml FROM `data_pemilih`  GROUP BY LOWER(`nama_lengkap`) HAVING COUNT(id) > 1 ORDER BY COUNT(id) DESC, LOWER(`nama_lengkap`), `data_pemilih`.`rw`, `data_pemilih`.`rt` ASC LIMIT 1200';
 			$data['filter'] = 'NAMA LENGKAP';
 		}else if($id_filter==2){
-			$query 		= 'SELECT `nik`, COUNT(id) as jml FROM `data_pemilih`  GROUP BY `nik` HAVING COUNT(id) > 1 ORDER BY COUNT(id) DESC, `data_pemilih`.`rw`, `data_pemilih`.`rt` ASC LIMIT 500';
+			$query 		= 'SELECT `nik`, COUNT(id) as jml FROM `data_pemilih`  GROUP BY `nik` HAVING COUNT(id) > 1 ORDER BY COUNT(id) DESC, `data_pemilih`.`rw`, `data_pemilih`.`rt` ASC LIMIT 1200';
 			$data['filter'] = 'NIK';
 		}else if($id_filter==3){
-			$query 		= 'SELECT `tgl_lahir`, COUNT(id) as jml FROM `data_pemilih`  GROUP BY `tgl_lahir` HAVING COUNT(id) > 1 ORDER BY COUNT(id) DESC, `tgl_lahir`, `data_pemilih`.`rw`, `data_pemilih`.`rt` ASC LIMIT 500';
+			$query 		= 'SELECT `tgl_lahir`, COUNT(id) as jml FROM `data_pemilih`  GROUP BY `tgl_lahir` HAVING COUNT(id) > 1 ORDER BY COUNT(id) DESC, `tgl_lahir`, `data_pemilih`.`rw`, `data_pemilih`.`rt` ASC LIMIT 6000';
 			$data['filter'] = 'TANGGAL LAHIR';
 		}
 		$data['rekap']	= $this->db->query($query)->result_array();
@@ -131,7 +131,7 @@ class Data_pemilih extends CI_Controller {
 			}
 		   $tr_row .= '<tr id="pemilih'. $value['id'] .'">
 								<td id="select'. $value['id'] .'"><div class="checkbox checkbox-css">
-											<input type="checkbox" name="select_urut" class="selected_urut" id="cssCheckbox1'. $value['id'] .'" value="'. $value['id'] .'" checked="">
+											<input type="checkbox" name="select_urut" class="selected_urut" id="cssCheckbox1'. $value['id'] .'" value="'. $value['id'] .'">
 											<label for="cssCheckbox1'. $value['id'] .'">'. $value['no_urut'] .'</label>
 										</div>
 								</td>
@@ -223,6 +223,7 @@ class Data_pemilih extends CI_Controller {
 	{
 		$this->form_validation->set_rules('nik','', 'trim');
 		$this->form_validation->set_rules('nama_lengkap','', 'required|trim');
+		$this->form_validation->set_rules('tmp_lahir','', 'required|trim');
 		$this->form_validation->set_rules('lp','', 'required|trim');
 		$this->form_validation->set_rules('id_dusun','', 'required|trim');
 		$this->form_validation->set_rules('rt','', 'required|trim');
@@ -231,6 +232,9 @@ class Data_pemilih extends CI_Controller {
 		$this->form_validation->set_rules('dusun','', 'required|trim');
 		$this->form_validation->set_rules('no_urut','', 'required|trim');
 		$this->form_validation->set_rules('nokk','', 'trim');
+		$this->form_validation->set_rules('tgl','Tanggal', 'required|trim|numeric');
+		$this->form_validation->set_rules('bln','Bulan', 'required|trim|numeric');
+		$this->form_validation->set_rules('thn','Tahun', 'required|trim|numeric');
 
 		if($this->form_validation->run()==true){
 			$nik 				= $this->input->post('nik');
@@ -243,6 +247,8 @@ class Data_pemilih extends CI_Controller {
 			$dusun 			= $this->input->post('dusun');
 			$no_urut  		= $this->input->post('no_urut');
 			$nokk  			= $this->input->post('nokk');
+			$tanggal 		= $this->input->post('thn').'/'.$this->input->post('bln').'/'.$this->input->post('tgl');
+			$tmp_lahir  	= $this->input->post('tmp_lahir');
 
 			//cek nomor undangan
 			$cek 			= $this->Query->select_where('data_pemilih', array('no_urut'), array('no_urut'=> $no_urut), 0,1, 'no_urut ASC');
@@ -270,6 +276,8 @@ class Data_pemilih extends CI_Controller {
 																			'sts_nikah'		=> $sts_nikah,
 																			'no_urut'		=> $no_urut,
 																			'nokk'			=> $nokk,
+																			'tgl_lahir'			=> $tanggal,
+																			'tmp_lahir'			=> $tmp_lahir,
 																		));
 
 			$nom	= $this->Query->select_where('data_pemilih', array('max(no_urut) as nom'), array('aktif'=> 1), 0,1, 'id DESC')->row();
@@ -296,6 +304,7 @@ class Data_pemilih extends CI_Controller {
 		$this->form_validation->set_rules('id_pemilih','', 'required|trim');
 		$this->form_validation->set_rules('nik','', 'required|trim');
 		$this->form_validation->set_rules('nama_lengkap','', 'required|trim');
+		$this->form_validation->set_rules('tmp_lahir','', 'required|trim');
 		$this->form_validation->set_rules('lp','', 'required|trim');
 		$this->form_validation->set_rules('id_dusun','', 'required|trim');
 		$this->form_validation->set_rules('rt','', 'required|trim');
@@ -304,6 +313,9 @@ class Data_pemilih extends CI_Controller {
 		$this->form_validation->set_rules('dusun','', 'required|trim');
 		$this->form_validation->set_rules('no_urut','', 'required|trim');
 		$this->form_validation->set_rules('nokk','', 'trim');
+		$this->form_validation->set_rules('tgl','Tanggal', 'required|trim|numeric');
+		$this->form_validation->set_rules('bln','Bulan', 'required|trim|numeric');
+		$this->form_validation->set_rules('thn','Tahun', 'required|trim|numeric');
 
 		if($this->form_validation->run()==true){
 			$id 				= $this->input->post('id_pemilih');
@@ -317,6 +329,8 @@ class Data_pemilih extends CI_Controller {
 			$dusun 			= $this->input->post('dusun');
 			$no_urut  		= $this->input->post('no_urut');
 			$nokk  			= $this->input->post('nokk');
+			$tmp_lahir  	= $this->input->post('tmp_lahir');
+			$tanggal 		= $this->input->post('thn').'/'.$this->input->post('bln').'/'.$this->input->post('tgl');
 
 			$this->Query->updateData('data_pemilih', 
 											array(
@@ -328,6 +342,8 @@ class Data_pemilih extends CI_Controller {
 												'id_dusun'			=> $id_dusun,
 												'sts_nikah'			=> $sts_nikah,
 												'nokk'				=> $nokk,
+												'tgl_lahir'			=> $tanggal,
+												'tmp_lahir'			=> $tmp_lahir,
 											),
 												array('id' 		=> $id)
 											);
@@ -363,6 +379,8 @@ class Data_pemilih extends CI_Controller {
 			$data['rtrw']		= $rt . '/'. $rw;
 			$data['nkh']		= $nkh;
 			echo json_encode(array('sts'=> true, 'data'=> $data));
+		}else{
+			echo json_encode(array('sts'=> false, 'msg'=> validation_errors()));
 		}	
 	}
 
@@ -452,18 +470,31 @@ class Data_pemilih extends CI_Controller {
 	public function print_und_pemilih()
 	{
 		$id_list 	= $this->input->get('clist');
+		$rt 			= $this->input->get('rt');
+		$rw 			= $this->input->get('rw');
 		$uid 			= $this->session->userdata('uid');
 		$margin		= $this->Query->select_where('print_und_setup', array('*'), array('uid_user'=> $uid), 0,1,'id ASC');
 		if($margin->num_rows()>0){
-			if($id_list!=""){
+			if($id_list==""){
+				if($rt!="" || $rw!=""){
+					$filter  = 'AND data_pemilih.rw ='. $rw .' AND data_pemilih.rt=' . $rt;
+				}else{
+					$filter  = '';
+				}
+			}else{
 				$id_list= preg_replace("/-/", ",", $id_list);
-				$data['pemilih'] 	= $this->Query->select_where_join2('data_pemilih', 'dusun', 'dusun.uid=data_pemilih.id_dusun', 
-																	array('data_pemilih.id', 'data_pemilih.no_urut', 'data_pemilih.nik', 'data_pemilih.nama_lengkap', 'data_pemilih.tmp_lahir', 'data_pemilih.tgl_lahir', 'dusun.dusun', 'IF(data_pemilih.lp=1,"L","P") as lp','data_pemilih.rt', 'data_pemilih.rw', 'IF(data_pemilih.sts_nikah=0,"BELUM", IF(data_pemilih.sts_nikah=1,"SUDAH","PERNAH"))as sts_nkh', 'data_pemilih.qr_code'),
-																	'data_pemilih.aktif=1 AND data_pemilih.id IN ('. $id_list .')',
-																	0, 300, 'data_pemilih.no_urut ASC')->result_array();
-				$data['margin']	= $this->Query->select_where('print_und_setup', array('*'), array('uid_user'=> $uid), 0,1,'id ASC')->row();
-				$this->load->view('dashboard/data_pemilih/print/Und_pemilih', $data);
+				$filter 	= ' AND data_pemilih.no_urut IN ('. $id_list .')';
 			}
+				$data['pemilih'] 	= $this->Query->select_where_join3('data_pemilih', 'dusun', 'pilkades_dapil',
+																	array(
+																		'dusun.uid=data_pemilih.id_dusun',
+																		'pilkades_dapil.id=data_pemilih.id_dapil',
+																	), 
+																	array('data_pemilih.id', 'data_pemilih.no_urut', 'data_pemilih.nik', 'data_pemilih.nama_lengkap', 'data_pemilih.tmp_lahir', 'data_pemilih.tgl_lahir', 'dusun.dusun', 'IF(data_pemilih.lp=1,"L","P") as lp','data_pemilih.rt', 'data_pemilih.rw', 'IF(data_pemilih.sts_nikah=0,"BELUM", IF(data_pemilih.sts_nikah=1,"SUDAH","PERNAH"))as sts_nkh', 'data_pemilih.qr_code', 'pilkades_dapil.dapil'),
+																	'data_pemilih.aktif=1 ' . $filter,
+																	0, 500, 'data_pemilih.id_dapil,data_pemilih.rw,data_pemilih.rt,data_pemilih.nokk, data_pemilih.no_urut ASC')->result_array();
+			$data['margin']	= $this->Query->select_where('print_und_setup', array('*'), array('uid_user'=> $uid), 0,1,'id ASC')->row();
+			$this->load->view('dashboard/data_pemilih/print/Und_pemilih', $data);
 		}else{
 			$default = $this->Query->select_where('print_und_setup', 
 													array('*'), 
@@ -480,6 +511,40 @@ class Data_pemilih extends CI_Controller {
 											));
 			$this->print_und_pemilih();
 		}
+	}
+
+	public function get_rekap_pemilih()
+	{
+		$jns 	= $this->input->get('jns');
+		if($jns==1){
+			$query = $this->Query->select_where_join2_group_by('data_pemilih', 'dusun', 
+									'dusun.uid=data_pemilih.id_dusun', 
+									array('dusun.dusun as field', 
+									'MIN(data_pemilih.no_urut) as start',
+									'MAX(data_pemilih.no_urut) as end',
+									'SUM(IF(data_pemilih.lp=1,1,0)) as jml_lk',
+									'SUM(IF(data_pemilih.lp=2,1,0)) as jml_pr',
+									'COUNT(data_pemilih.id) as total',
+									),
+									array('dusun.dusun'),
+									'data_pemilih.aktif=1',
+									0, 60, 'data_pemilih.id_dusun ASC')->result_array();
+		}else{
+			$query = $this->Query->select_where_join2_group_by('data_pemilih', 'pilkades_dapil', 
+									'pilkades_dapil.id=data_pemilih.id_dapil', 
+									array('pilkades_dapil.dapil as field', 
+									'MIN(data_pemilih.no_urut) as start',
+									'MAX(data_pemilih.no_urut) as end',
+									'SUM(IF(data_pemilih.lp=1,1,0)) as jml_lk',
+									'SUM(IF(data_pemilih.lp=2,1,0)) as jml_pr',
+									'COUNT(data_pemilih.id) as total',
+									),
+									array('pilkades_dapil.dapil'),
+									'data_pemilih.aktif=1',
+									0, 60, 'pilkades_dapil.dapil ASC')->result_array();
+		}
+		$data['rekap']	= $query;
+		$this->load->view('dashboard/data_pemilih/Rekap_pemilih', $data);
 	}
 
 	public function print_und_pemilih_tes()
@@ -1069,6 +1134,31 @@ public function download_dpt_excel(Type $var = null)
 		}
 
 		return str_pad($tgl, 2, "0", STR_PAD_LEFT) . '|' . $bln .'|'.$thn; 
+	}
+
+	public function gen_no_und($value='')
+	{
+		$data = $this->Query->select_where('data_pemilih', 
+										array('id_dapil', 'rw', 'rt', 'nokk', 'id'), 
+										array(), 0, 30000, 'id_dapil, rw, rt, nokk, id ASC');
+		$new_und = 1;
+		$dapil 	= 0;
+		echo '<table>';
+		foreach ($data->result_array() as $key => $value) {
+			if($dapil != $value['id_dapil']){
+				$new_und = 1;
+			}
+			$dapil = $value['id_dapil'];
+			echo '<tr>
+						<td>'. $value['id_dapil'] .'</td>
+						<td>'. $value['rw'] .'</td>
+						<td>'. $value['rt'] .'</td>
+						<td>'. $value['nokk'] .'</td>
+						<td>'. $value['id_dapil']. str_pad($new_und, 3, "0", STR_PAD_LEFT) .'</td>
+					</tr>';
+			$new_und++;
+		}
+		echo "</table>";
 	}
 }
 

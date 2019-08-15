@@ -1,3 +1,9 @@
+<?php
+$date=date_create($data->tgl_lahir);
+ 	$tgl 	= date_format($date,'d');
+ 	$bln 	= date_format($date,'m');
+ 	$thn 	= date_format($date,'Y');
+?>
 <div class="panel panel-inverse panel_modal">
 	<div class="panel-heading">
 		<div class="panel-heading-btn">
@@ -43,6 +49,24 @@
 			<div class="form-row">
 				<div class="col-md-6">
 					<div class="form-group">
+						<label for="tmp_lahir">Tempat Lahir</label>
+						<input type="text" class="form-control" id="tmp_lahir" name="tmp_lahir" placeholder="Tempat Lahir"  value="<?php echo $data->tmp_lahir;?>">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label>Tanggal</label>
+						<div class="input-group input-daterange">
+							<input type="text" class="form-control form-control-sm" name="tgl" id="tgl" placeholder="Tanggal" value="<?php echo $tgl;?>" title="Tanggal">
+							<input type="text" class="form-control form-control-sm" name="bln" id="bulan" placeholder="Bulan" value="<?php echo $bln;?>" title="Bulan">
+							<input type="text" class="form-control form-control-sm" name="thn" id="tahun" placeholder="Tahun" value="<?php echo $thn;?>" title="Tahun">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="col-md-6">
+					<div class="form-group">
 						<label for="dusun">Dusun</label>
 						<select  class="form-control" name="id_dusun" id="id_dusun_form">
 							<?php 
@@ -78,7 +102,19 @@
 						</select>
 					</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="id_dapil">DAPIL</label>
+						<select  class="form-control" name="id_dapil" id="id_dapil">
+							<?php 
+								$get = $this->Query->select_where('pilkades_dapil', array('*'), array(), 0, 20, 'dapil ASC');
+								foreach ($get->result_array() as $key => $value) { ?>
+								<option <?php if($data->id_dapil==$value['id']){echo 'selected';}?> value="<?php echo $value['id'];?>"><?php echo $value['dapil'];?></option>
+							<?php } ?>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-3">
 					<div class="form-group">
 						<label for="no_urut">No Undangan</label>
 						<input type="text" class="form-control" id="no_urut" name="no_urut" placeholder="No. Undangan"  value="<?php echo $data->no_urut;?>">
@@ -88,6 +124,7 @@
 			<div class="row">
 				<div class="col">
 					<button type="button" id="btn_remove" class="btn btn-sm btn-danger" onclick="remove_pemilih(<?php echo $data->id;?>)" value="<?php echo $data->id;?>">Hapus</button>
+					<a href="<?php echo base_url('data_pemilih/print_und_pemilih?clist='.$data->no_urut);?>" target="_blank" class="btn btn-sm btn-success">Print Und</a>
 					<button type="submit" id="btn_update" class="btn btn-sm btn-primary pull-right">Simpan</button>
 					<button type="button" class="btn btn-sm btn-success pull-right m-r-3"  data-dismiss="modal">Tutup</button>
 				</div>

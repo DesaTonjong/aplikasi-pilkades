@@ -14,9 +14,9 @@ class Sesi extends CI_Model {
 
     public function isAdmin($value='')
     {
-        $CI                =& get_instance();
-        $is_logged_in      = $CI->session->userdata('uid');
-        $cek_user				= $CI->Query->select_where('users', array('rules_akses'), array('uid'=> $is_logged_in),0,1,'id ASC')->row();
+        $CI             =& get_instance();
+        $is_logged_in   = $CI->session->userdata('uid');
+        $cek_user		= $CI->Query->select_where('users', array('rules_akses'), array('uid'=> $is_logged_in),0,1,'id ASC')->row();
         $oto 					= explode(',', $cek_user->rules_akses);
         $isAdmin 				= false;
 

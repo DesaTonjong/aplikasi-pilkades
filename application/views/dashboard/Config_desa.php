@@ -15,31 +15,51 @@
 		<div class="col-md-8">
 		<form action="<?php echo $base_url_int.'setting/update_config';?>" method="POST" id="form_update_config">
 			<div class="form-group row m-b-15">
-				<label class="col-form-label col-md-3">Kode Desa</label>
+				<label class="col-form-label col-md-3">Sistem Desa</label>
 				<div class="col-md-9">
-					<input type="text" name="desa_kode" class="form-control m-b-5" placeholder="Kode Desa" value="<?php echo $config->desa_kode;?>">
-					<small class="f-s-12 text-grey-darker">Isikan dengan benar kode desa, informasi lebih lanjut hubungi Administrator.</small>
+					<input type="text" name="sistem" class="form-control m-b-5" placeholder="Sistem Desa" value="<?php echo $config->sistem;?>">
+					<small class="f-s-12 text-grey-darker">Sistem Tata Pemerintahan Desa (Desa/Kelurahan)</small>
 				</div>
 			</div>
 			<div class="form-group row m-b-15">
-				<label class="col-form-label col-md-3">Sistem Desa</label>
+				<label class="col-form-label col-md-3">Nama Desa</label>
 				<div class="col-md-9">
-					<input type="text" name="sistem" class="form-control m-b-5" placeholder="Kode Desa" value="<?php echo $config->sistem;?>">
-					<small class="f-s-12 text-grey-darker">Sistem Tata Pemerintahan Desa (Desa/Kelurahan)</small>
+					<input type="text" name="desa" class="form-control m-b-5" placeholder="Nama Desa" value="<?php echo $config->desa;?>">
+				</div>
+			</div>
+			<div class="form-group row m-b-15">
+				<label class="col-form-label col-md-3">Kecamatan</label>
+				<div class="col-md-9">
+					<input type="text" name="kec" class="form-control m-b-5" placeholder="Nama Kecamatan" value="<?php echo $config->kec;?>">
+				</div>
+			</div><div class="form-group row m-b-15">
+				<label class="col-form-label col-md-3">Kabupaten/Kota</label>
+				<div class="col-md-9">
+					<input type="text" name="kabkot" class="form-control m-b-5" placeholder="Nama Kabupaten" value="<?php echo $config->kabkot;?>">
 				</div>
 			</div>
 			<div class="form-group row m-b-15">
 				<label class="col-form-label col-md-3">Digit Nomor Undangan</label>
 				<div class="col-md-9">
-					<input type="text" name="dig_no_und" class="form-control m-b-5" placeholder="Kode Desa" value="<?php echo $config->dig_no_und;?>">
+					<input type="text" name="dig_no_und" class="form-control m-b-5" placeholder="Digit Nomor Undangan" value="<?php echo $config->dig_no_und;?>">
 					<small class="f-s-12 text-grey-darker">Digit Penomoran Nomor Undangan PILKADES</small>
 				</div>
 			</div>
 			<div class="form-group row m-b-15">
-				<label class="col-form-label col-md-3">Kapasitas Ruang Tunggu</label>
+				<label class="col-form-label col-md-3"></label>
 				<div class="col-md-9">
-					<input type="text" name="antri" class="form-control m-b-5" placeholder="Jumlah Kursi Ruang Tunggu" value="<?php echo $config->antri;?>">
-					<small class="f-s-12 text-grey-darker">Jumlah kursi/kapasitas ruang tunggu antrian pencoblosan</small>
+					<div class="checkbox checkbox-css checkbox-inline">
+					  <input type="checkbox" id="per_dapil" name="per_dapil" <?php if($config->per_dapil==1){echo 'checked';}?> />
+					  <label for="per_dapil">Kehadiran per dapil</label>
+					</div>
+					<div class="checkbox checkbox-css checkbox-inline">
+					  <input type="checkbox" id="qr_code" name="qr_code"  <?php if($config->qr_code==1){echo 'checked';}?> />
+					  <label for="qr_code">QR Code</label>
+					</div>
+					<div class="checkbox checkbox-css checkbox-inline">
+					  <input type="checkbox" id="bar_code" name="bar_code"  <?php if($config->bar_code==1){echo 'checked';}?> />
+					  <label for="bar_code">Barcode</label>
+					</div>
 				</div>
 			</div>
 

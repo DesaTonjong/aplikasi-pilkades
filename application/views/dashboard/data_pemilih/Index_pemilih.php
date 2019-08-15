@@ -33,9 +33,9 @@
 	<div class="tab-content">
 		<div class="tab-pane fade active show" id="default-tab-1">
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-5">
 				<form id="form_get_rekap_dapil" action="<?php echo $base_url_int.'data_pemilih/get_rekap_dapil';?>" class="m-b-10">
-					<div class="form-group row ">
+					<div class="form-group row">
 						<label class="col-form-label col-md-3">Dapil</label>
 						<div class="col-md-4">
 							<select name="dapil_id" id="dapil_id_filter" class="form-control form-control-sm" onchange="get_rekap_dapil()">
@@ -49,17 +49,22 @@
 						</select>
 					</div>
 					<div class="col-md-4">
-						<a href="#ModalFormMid" data-toggle="modal" class="btn btn-sm btn-primary"><i class="fa fa-chart-pie"></i></a>
+						<div class="btn-group">
+							<a href="#ModalFormMid" data-toggle="modal" title="Rekap per Dusun" class="btn btn-sm btn-primary" onclick="get_rekap_pemilih(1)"><i class="fa fa-chart-pie"></i></a>
+							<a href="#ModalFormMid" data-toggle="modal" title="Rekap per Dapil" class="btn btn-sm btn-success" onclick="get_rekap_pemilih(2)"><i class="fa fa-chart-pie"></i></a>
+						</div>
 					</div>
 					</div>
 				</form>
 				<div id="rekap_dapil_root"></div>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-7">
 				<div class="row">
 					<div class="col-md-12">
 						<div class="btn-group">
 							<a href="javascript:;" class="btn btn-success" title="Print Undangan" onclick="print_undangan()">Und</a>
+							<a href="javascript:;" class="btn btn-success" title="Upload dari excel" onclick="show_upload_pemilih()"><i class="fa fa-cloud-upload-alt"></i></a>
+							<a href="#ModalFormMid" class="btn btn-success" data-toggle="modal"  title="Data Dusun" onclick="get_form_dusun()"><i class="fas fa-lg fa-fw fa-database"></i></a>
 							<a href="#" data-toggle="dropdown" class="btn btn-success dropdown-toggle" aria-expanded="false"></a>
 							<ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(86px, 33px, 0px);">
 								<li><a href="#ModalFormMid" data-toggle="modal" onclick="get_form_add()"><i class="fa fa-user" aria-hidden="true"></i> Tambah Data Pemilih</a></li>
@@ -97,7 +102,7 @@
 							<thead>
 								<tr>
 									<th width="60px"><div class="checkbox checkbox-css">
-															<input type="checkbox" id="select_urut_checkbox" value="0" checked=""  onClick="check_uncheck_checkbox(this.checked);">
+															<input type="checkbox" id="select_urut_checkbox" value="0" onClick="check_uncheck_checkbox(this.checked);">
 															<label for="select_urut_checkbox">UND</label>
 														</div></th>
 									<th>NAMA LENGKAP</th>
@@ -120,16 +125,18 @@
 			<h3>Maaf belum selesai fiturnya, lompatin aja</h3>
 		</div>
 		<div class="tab-pane fade" id="default-tab-3">
-			<h3>Potensi Ganda</h3>
 			<div class="row">
 				<div class="col-md-4">
 					<form id="form_pot_ganda" action="<?php echo $base_url_int.'data_pemilih/get_pot_ganda';?>" class="m-b-10">
-						<div class="input-group">
-							<select name="pot_ganda_filter" id="pot_ganda_filter" class="form-control form-control-sm" onchange="get_pot_ganda()">
-							<option value="1">Nama</option>
-							<option value="2">NIK</option>
-							<option value="3">Tanggal lahir</option>
-						</select>
+						<div class="form-group row">
+							<label class="col-form-label col-md-5">Potensi Ganda</label>
+							<div class="col-md-7">
+								<select name="pot_ganda_filter" id="pot_ganda_filter" class="form-control form-control-sm" onchange="get_pot_ganda()">
+									<option value="1">Nama</option>
+									<option value="2">NIK</option>
+									<option value="3">Tanggal lahir</option>
+								</select>
+							</div>
 						</div>
 					</form>
 				</div>
@@ -141,14 +148,17 @@
 					</div>
 				</div>
 				<div class="col-md-8">
-					<div id="result_ganda"></div>
+					<div class="chats bg-grey-transparent-2" data-scrollbar="true" data-height="450px">
+						<div id="result_ganda"></div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 </div>
-<div class="panel panel-inverse panel_data">
+
+<!-- <div class="panel panel-inverse panel_data">
 	<div class="panel-heading">
 		<div class="panel-heading-btn">
 			<a href="#ModalForm"  class="btn btn-xs btn-icon btn-circle btn-primary" onclick="show_upload_pemilih()"><i class="fa fa-cloud-upload-alt"></i></a>
@@ -160,4 +170,4 @@
 	<div class="panel-body panel_data_body">
 
 	</div>
-</div>
+</div> -->

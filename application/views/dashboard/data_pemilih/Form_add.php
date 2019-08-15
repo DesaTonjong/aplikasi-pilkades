@@ -42,6 +42,24 @@
 			<div class="form-row">
 				<div class="col-md-6">
 					<div class="form-group">
+						<label for="tmp_lahir">Tempat Lahir</label>
+						<input type="text" class="form-control" id="tmp_lahir" name="tmp_lahir" placeholder="Tempat Lahir">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label>Tanggal</label>
+						<div class="input-group input-daterange">
+							<input type="text" class="form-control form-control-sm" name="tgl" id="tgl" placeholder="Tanggal" title="Tanggal">
+							<input type="text" class="form-control form-control-sm" name="bln" id="bulan" placeholder="Bulan" title="Bulan">
+							<input type="text" class="form-control form-control-sm" name="thn" id="tahun" placeholder="Tahun" title="Tahun">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="col-md-6">
+					<div class="form-group">
 						<label for="dusun">Dusun</label>
 						<select  class="form-control" name="id_dusun" id="id_dusun_form">
 							<?php 
@@ -77,7 +95,19 @@
 						</select>
 					</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="id_dapil">DAPIL</label>
+						<select  class="form-control" name="id_dapil" id="id_dapil">
+							<?php 
+								$get = $this->Query->select_where('pilkades_dapil', array('*'), array(), 0, 20, 'dapil ASC');
+								foreach ($get->result_array() as $key => $value) { ?>
+								<option value="<?php echo $value['id'];?>"><?php echo $value['dapil'];?></option>
+							<?php } ?>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-3">
 					<div class="form-group">
 						<label for="no_urut">No Undangan</label>
 						<input type="text" class="form-control" id="no_urut" name="no_urut" placeholder="No Undangan" value="<?php echo $nom->nom + 1;?>">

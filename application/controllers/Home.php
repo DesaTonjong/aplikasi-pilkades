@@ -43,6 +43,20 @@ class Home extends CI_Controller {
 						$akses['adminpilkades'] = 'Admin Pilkades';
 					}else if($value==4){
 						$akses['oprpilkades'] = 'Operator Pilkades';
+					}else if($value==5){
+						$uid_khadir = '';
+						$get 	= $this->Query->select_where('pilkades_dapil', array('id', 'uid_khadir'), array(),0,15, 'id ASC');
+						foreach ($get->result_array() as $key => $value) {
+							if($value['uid_khadir']!=""){
+								$uid_khadir = explode(',', $value['uid_khadir']);
+								for ($i=0; $i < COUNT($uid_khadir); $i++) { 
+									if($row->uid==$uid_khadir[$i]){
+										$akses['dapil_khadir'] = $value['id'];
+									}
+								}
+							}
+						}
+						$akses['oprkhadir'] = 'Operator Kehadiran';
 					}
 				}
 				
@@ -50,17 +64,17 @@ class Home extends CI_Controller {
 				$this->session->set_userdata($data);
 				echo json_encode(array('sts'=>true, 'msg'=> 'Login Anda Sukses', 'url'=> $base_url_int.'dashboard?p=dashboard'));
 			}else{
-				$data['csrf'] = array(
-				        'name' => $this->security->get_csrf_token_name(),
-				        'hash' => $this->security->get_csrf_hash()
-				);
+				// $data['csrf'] = array(
+				//         'name' => $this->security->get_csrf_token_name(),
+				//         'hash' => $this->security->get_csrf_hash()
+				// );
 				echo json_encode(array('sts'=> false, 'data'=> $data, 'msg'=> 'Username dan Password anda salah', 'url'=>  $base_url_int.'home/login'));
 			}
 		}else{
-			$data['csrf'] = array(
-			        'name' => $this->security->get_csrf_token_name(),
-			        'hash' => $this->security->get_csrf_hash()
-			);
+			// $data['csrf'] = array(
+			//         'name' => $this->security->get_csrf_token_name(),
+			//         'hash' => $this->security->get_csrf_hash()
+			// );
 			echo json_encode(array('sts'=> false, 'data'=> $data, 'msg'=> validation_errors(), 'url'=>  $base_url_int.'home/login'));
 		}
 	}

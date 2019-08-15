@@ -14,7 +14,13 @@ class Kehadiran extends CI_Controller {
 
  	public function index()
  	{
- 		$uid 				= $this->session->userdata('uid');
+ 		$uid 					= $this->session->userdata('uid');
+ 		$akses_khadir 		= $this->session->userdata('akses')['dapil_khadir']; 
+ 		if(isset($akses_khadir)){ 
+ 		$data['dapil']		= $this->Query->select_where('pilkades_dapil', 
+													array('dapil'), 
+													array('id'=> $this->session->userdata('akses')['dapil_khadir']),0,1,'id ASC')->row();
+ 		}
  		$data['kehadiran']	= $this->Query->select_where_join3('pilkades_kehadiran', 'data_pemilih', 'dusun', 
  															array(
  																'data_pemilih.id=pilkades_kehadiran.id_pemilih',

@@ -56,7 +56,7 @@
 				margin-left: 700px;
 				margin-top: <?php echo $qr_code[0].'px';?>;
 				margin-left: <?php echo $qr_code[1].'px';?>;
-				padding: 10px;
+				padding: 5px;
 				border: 7px solid #000000;
 			}
 
@@ -140,7 +140,7 @@
 			foreach ($pemilih as $key => $value) { 
 				$nik 	= '';
 				if($value['nik']!=""){
-					$nik 				= $this->Set->nik_space($value['nik']).'<br>';
+					$nik 				= '<br>'.$this->Set->nik_space($value['nik']);
 					$nik_q 			= '';
 					if($cfg['qr_code']==1){
 						$nik_q 		.= $value['nik'];
@@ -157,17 +157,20 @@
 					<div class="wrap_data">
 						<?php if($cfg['qr_code']==1){ ?>
 							<div class="wrap_qr text-center" style="border-radius: 15px;">
+								<?php echo '<b><span class="f-s-18 f-w-600 text-inverse">'. strtoupper($value['dapil']). '</span></b>';?>
 								<img src="<?php echo $qr_code;?>">
-								<?php echo '<b><span class="f-s-18 f-w-600">'. $nik. '</span></b>';?>
+								<?php echo '<b><span class="f-s-18 f-w-600">'. $this->Set->nik_space($value['nik']). '</span></b>';?>
 							</div>
 						<?php } ?>
 						<?php if($cfg['bar_code']==1){ ?>
 							<div class="wrap_bar text-center" style="border-radius: 15px;">
+								<?php echo '<b><span class="f-s-18 f-w-600 text-inverse">'. strtoupper($value['dapil']). '</span></b>';?>
 								<img src="<?php echo $bar_code;?>">
 							</div>
 						<?php } ?>
+
 						<span class="no_urut_top text-inverse"><?php echo str_pad($value['no_urut'], $cfg['dig_no_und'], "0", STR_PAD_LEFT);?></span>
-						<span class="nama_pemilih text-inverse"><?php echo $nik. strtoupper($value['nama_lengkap']);?></span>
+						<span class="nama_pemilih text-inverse"><span class="f-s-16 f-w-300">Kepada yang terhormat:</span><br><?php echo strtoupper($value['nama_lengkap']).$nik;?></span>
 						<span class="alamat_pemilih"><?php echo $value['dusun'] . " RT/RW : ". $value['rt'] . "/" . $value['rw'];?></span>
 						<span class="alamat_pemilih2"><?php echo $cfg['sistem'] . ' '. ucwords(strtolower($cfg['desa'])) . ' - Kec. '. ucwords(strtolower($cfg['kec']));?></span>
 						<span class="no_urut_bottom"><?php echo str_pad($value['no_urut'], $cfg['dig_no_und'], "0", STR_PAD_LEFT);?></span>

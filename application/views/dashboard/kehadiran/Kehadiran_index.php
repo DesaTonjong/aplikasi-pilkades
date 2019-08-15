@@ -40,9 +40,10 @@
 	
 	<div id="page-container" class="fade">
 		<div class="login login-v2" data-pageload-addclass="animated fadeIn">
+			<?php if(isset($dapil)){ ?>
 			<div class="login-header">
 				<div class="brand">
-					<span class="logo"></span> <b>APP</b> PILKADES
+					<span class="logo"></span> <b>PILKADES</b>  <?php echo strtoupper($dapil->dapil);?>
 					<small><?php echo $cfg['sistem'] . ' '. ucwords(strtolower($cfg['desa'])) . ' Kec. '. ucwords(strtolower($cfg['kec']));?></small>
 				</div>
 				<div class="icon">
@@ -88,6 +89,23 @@
 						</ul>
 					</div>
 			</div>
+			<?php }else { ?>
+				<div class="login-header">
+					<div class="brand text-center">
+						<b>Mohon maaf anda belum punya otoritas ...!</b>
+					</div>
+				</div>
+
+			<div class="login-content">
+				
+					<div class="d-block text-center mt-3">
+						<ul class="list-unstyled">
+							<li><a href="<?php echo base_url('dashboard?p=dashboard');?>">Kembali ke Halaman Utama</a></li>
+							<li><a href="https://masjum.com" target="_blank">Aplikasi PILKADES dikembangkan oleh masjum.com</a></li>
+						</ul>
+					</div>
+			</div>
+			<?php }?>
 		</div>
 	</div>
 	<script type="text/javascript">

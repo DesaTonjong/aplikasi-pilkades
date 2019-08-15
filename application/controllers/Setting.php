@@ -14,20 +14,46 @@ class Setting extends CI_Controller {
 
 	public function update_config()
 	{
-		$this->form_validation->set_rules('desa_kode','', 'required|trim|numeric');
+		$this->form_validation->set_rules('desa','', 'required|trim');
+		$this->form_validation->set_rules('kec','', 'required|trim');
+		$this->form_validation->set_rules('kabkot','', 'required|trim');
 		$this->form_validation->set_rules('sistem','', 'required|trim');
 		$this->form_validation->set_rules('dig_no_und','', 'required|trim|numeric');
-		$this->form_validation->set_rules('antri','', 'required|trim|numeric');
+		$this->form_validation->set_rules('per_dapil','', 'trim');
+		$this->form_validation->set_rules('qr_code','', 'trim');
+		$this->form_validation->set_rules('bar_code','', 'trim');
 		if($this->form_validation->run()==true){
-			$desa_kode 				= $this->input->post('desa_kode');
-			$sistem 					= $this->input->post('sistem');
-			$dig_no_und 			= $this->input->post('dig_no_und');
-			$antri 					= $this->input->post('antri');
+			$desa 				= $this->input->post('desa');
+			$kec 					= $this->input->post('kec');
+			$kabkot 				= $this->input->post('kabkot');
+			$sistem 				= $this->input->post('sistem');
+			$dig_no_und 		= $this->input->post('dig_no_und');
+			$per_dapil 			= $this->input->post('per_dapil');
+			$qr_code 			= $this->input->post('qr_code');
+			$bar_code 			= $this->input->post('bar_code');
+			
+			$conf_per_dapil 	= 0;
+			if(isset($per_dapil)){
+				$conf_per_dapil = 1;
+			}
+			$conf_qr_code 		= 0;
+			if(isset($qr_code)){
+				$conf_qr_code 	= 1;
+			}
+			$conf_bar_code 	= 0;
+			if(isset($bar_code)){
+				$conf_bar_code = 1;
+			}
+			
 			$this->Query->updateData('config', array(
-													'desa_kode' 		=> $desa_kode,
-													'sistem' 			=> $sistem,
-													'dig_no_und' 		=> $dig_no_und,
-													'antri' 				=> $antri,
+													'desa' 			=> $desa,
+													'kec' 			=> $kec,
+													'kabkot' 		=> $kabkot,
+													'sistem' 		=> $sistem,
+													'dig_no_und' 	=> $dig_no_und,
+													'per_dapil' 	=> $conf_per_dapil,
+													'qr_code' 		=> $conf_qr_code,
+													'bar_code' 		=> $conf_bar_code,
 												),
 											array(
 												'id'	=> 1

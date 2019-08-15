@@ -177,6 +177,13 @@ $(document).on('submit', '#form_update', function () {
 			$("#nkh" + json.data.id).html(json.data.nkh);
 			$("#rtrw" + json.data.id).html(json.data.rtrw);
 			$("#dsn" + json.data.id).html(json.data.dsn);
+		}else{
+			Swal.fire({
+				title: 'Warning',
+				text: json.msg,
+				type: 'warning',
+				confirmButtonColor: '#3085d6',
+			});
 		}
 	}, 'json');
 	return false;
@@ -206,6 +213,13 @@ $(document).on('submit', '#form_add', function () {
 				text: json.msg,
 				time: 15000,
 				class_name: 'my-sticky-class'
+			});
+		}else{
+			Swal.fire({
+				title: 'Warning',
+				text: json.msg,
+				type: 'warning',
+				confirmButtonColor: '#3085d6',
 			});
 		}
 		btn.html('Simpan');
@@ -285,8 +299,13 @@ function print_undangan() {
 			sList += "-" + $(this).val();
 		}
 	});
+
 	sList = sList.substring(1);
-	var url = base_url + "data_pemilih/print_und_pemilih?clist=" + sList;
+
+	var rt = $("#rt_filter").val();
+	var rw = $("#rw_filter").val();
+
+	var url = base_url + "data_pemilih/print_und_pemilih?rw=" + rw + "&rt="+ rt + "&clist="+ sList;
 	var page_size = "width=900,height=600";
 	var popupWin = window.open(url, "_blank", page_size);
 	popupWin.document.open(url, "_blank", page_size);
@@ -296,7 +315,7 @@ function print_undangan() {
 
 function get_form_dusun() {
 	$.get(base_url + "data_pemilih/get_form_dusun", function (data) {
-		$("#data_content").html(data);
+		$("#data_content_mid").html(data);
 	});
 }
 
@@ -447,3 +466,9 @@ $(document).on('submit', '#form_set_dapil_update', function (e) {
 	}, 'json');
 	return false;
 });
+
+function get_rekap_pemilih(jns) {
+	$.get(base_url + "data_pemilih/get_rekap_pemilih", {'jns': jns}, function (data) {
+		$("#data_content_mid").html(data);
+	});
+}

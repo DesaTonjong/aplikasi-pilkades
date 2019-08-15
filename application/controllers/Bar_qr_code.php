@@ -17,6 +17,7 @@ class Bar_qr_code extends CI_Controller {
 		{
 			$value=$this->input->get('code');
 			header("Content-Type: image/png");
+			$params['errorlog'] = FCPATH.'application/logs/';
 			$params['data'] 			= $value;
 			$params['level'] 			= 'H';
 			$config['quality']		= true;
