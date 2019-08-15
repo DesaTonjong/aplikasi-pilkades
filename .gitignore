@@ -18,9 +18,8 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
-!application/config/database.php
-!application/config/config.php
-!stp-config.json
+stp-config.json
+.gitignore
 /vendor/
 /.vscode/
 
