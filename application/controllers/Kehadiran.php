@@ -38,16 +38,27 @@ class Kehadiran extends CI_Controller {
 		$this->form_validation->set_rules('key_search','Key Search', 'required|trim');
 		if($this->form_validation->run()==true){
 	 		$key_search 	= $this->input->post('key_search');
+ 			$id_dapil 	= $this->session->userdata('akses')['dapil_khadir']; 
 
 	 		if(is_numeric($key_search)){
-	 			$get_cek 	= $this->Query->select_where_join2('data_pemilih', 'dusun', 'dusun.uid=data_pemilih.id_dusun', 
-		                                        array('data_pemilih.id', 'data_pemilih.no_urut', 'data_pemilih.nik', 'data_pemilih.nama_lengkap', 'data_pemilih.tmp_lahir', 'data_pemilih.tgl_lahir', 'dusun.dusun', 'IF(data_pemilih.lp=1,"Laki-laki","Perempuan") as lp','data_pemilih.rt', 'data_pemilih.rw', 'IF(data_pemilih.sts_nikah=0,"BELUM", IF(data_pemilih.sts_nikah=1,"SUDAH","PERNAH"))as sts_nkh'),
-		                                        'data_pemilih.aktif=1  AND data_pemilih.no_urut='.$key_search,
+	 			$get_cek 	= $this->Query->select_where_join2('data_pemilih', 'dusun', 
+	 														'dusun.uid=data_pemilih.id_dusun', 
+		                                        array('data_pemilih.id', 'data_pemilih.no_urut', 'data_pemilih.nik', 'data_pemilih.nama_lengkap', 'data_pemilih.id_dapil', 'dusun.dusun', 'IF(data_pemilih.lp=1,"Laki-laki","Perempuan") as lp','data_pemilih.rt', 'data_pemilih.rw', ),
+		                                        'data_pemilih.aktif=1 AND data_pemilih.no_urut='.$key_search,
 		                                        0, 1 , 'data_pemilih.id ASC');
 	 			if($get_cek->num_rows()>0){
 	 				
 	 				$pemilih 	= $get_cek->row();
 	 				$cfg 			= $this->Cfg->get_data();
+
+	 				if($cfg['per_dapil']==1){
+	 				if($pemilih->id_dapil!=$id_dapil){
+		 				echo json_encode(array('sts'=> false, 'msg'=> '<div class="alert alert-pink fade show m-b-10">
+										<span class="close" data-dismiss="alert" onclick="cancel_kehadiran()">×</span><h3><b>'.$pemilih->nama_lengkap. '</b></h3>Nomor Undangan : <b>'. str_pad($key_search, $cfg['dig_no_und'], "0", STR_PAD_LEFT) .'</b><br><h3><span class="text-danger"><b>SALAH PINTU MASUK</b></span></h3></div>'));
+		 				exit();
+		 			}
+		 			}
+
 	 				$cek_hadir 	= $this->Query->select_where_join3('pilkades_kehadiran', 'data_pemilih', 'users_profile',
 	 													array('data_pemilih.id=pilkades_kehadiran.id_pemilih', 'users_profile.uid=pilkades_kehadiran.id_uid'), 
 	 													array('data_pemilih.nama_lengkap', 'data_pemilih.rt', 'data_pemilih.rw', 'pilkades_kehadiran.datetime_create', 'CONCAT(users_profile.nama_depan," ", users_profile.nama_belakang) as operator'), 
@@ -98,38 +109,47 @@ class Kehadiran extends CI_Controller {
  	{
 		$this->form_validation->set_rules('accept_id_ok','ID Pemilih', 'required|trim|numeric');
 		if($this->form_validation->run()==true){
+ 			$id_dapil 	= $this->session->userdata('akses')['dapil_khadir']; 
 	 		$accept_id 	= $this->input->post('accept_id_ok');
+	 		$pemilih 	= $this->Query->select_where_join3('data_pemilih', 'pilkades_dapil', 'dusun', 
+	 														array(
+		 														'pilkades_dapil.id=data_pemilih.id_dapil', 
+		 														'dusun.uid=data_pemilih.id_dusun', 
+		 													),
+		                                        array(
+		                                        	'data_pemilih.id', 
+		                                        	'data_pemilih.no_urut', 
+		                                        	'data_pemilih.nik', 
+		                                        	'data_pemilih.nama_lengkap', 
+		                                        	'data_pemilih.id_dapil', 
+		                                        	'dusun.dusun', 
+		                                        	'data_pemilih.rt', 
+		                                        	'data_pemilih.rw', 
+		                                        ),
+		                                        'data_pemilih.aktif=1  AND data_pemilih.id='.$accept_id,
+		                                        0, 1 , 'data_pemilih.id ASC')->row();
+
+	 		if($pemilih){
+	 			if($pemilih->id_dapil!=$id_dapil){
+	 				echo json_encode(array('sts'=> false, 'msg'=> "Salah masuk pintu"));
+	 				exit();
+	 			}
+	 		}
+
 	 		$cek_hadir 	= $this->Query->select_where_join2('pilkades_kehadiran', 'data_pemilih', 
 	 													'data_pemilih.id=pilkades_kehadiran.id_pemilih', 
 	 													array('data_pemilih.nama_lengkap', 'data_pemilih.rt', 'data_pemilih.rw', 'data_pemilih.no_urut', 'pilkades_kehadiran.datetime_create'), 
 	 													array('id_pemilih'=> $accept_id),0,5, 'pilkades_kehadiran.id ASC');
 	 		$cfg 			= $this->Cfg->get_data();
 	 		if($cek_hadir->num_rows()>0){
-	 			$pemilih 	= $cek_hadir->row();
-
+	 			$hadir 	= $cek_hadir->row();
 	 			echo json_encode(array('sts'=> false, 'data'=>  '<div class="alert alert-pink fade show m-b-10">
-										<span class="close" data-dismiss="alert">×</span><b><h3>'.$pemilih->nama_lengkap. '</h3></b>dengan Nomor Undangan : <b>'. str_pad($pemilih->no_urut, $cfg['dig_no_und'], "0", STR_PAD_LEFT) .'</b><br><span class="text-danger"><b>SUDAH HADIR</b></span><br>pada jam '. $pemilih->datetime_create .'</div>'));
+										<span class="close" data-dismiss="alert">×</span><b><h3>'.$hadir->nama_lengkap. '</h3></b>dengan Nomor Undangan : <b>'. str_pad($hadir->no_urut, $cfg['dig_no_und'], "0", STR_PAD_LEFT) .'</b><br><span class="text-danger"><b>SUDAH HADIR</b></span><br>pada jam '. $hadir->datetime_create .'</div>'));
 	 		}else{
-	 			$no_antri 	= '';
-	 			if($cfg['antri']>0){
-	 				$hdr 			= $this->Query->select_where('pilkades_kehadiran', array('COUNT(id) as hadir'), array(),0,1, 'id ASC')->row();
-		 			$limit 		= $cfg['antri'];
-		 			$hadir      = $hdr->hadir+1;
-		 			if($hdr->hadir==0){
-		 				$hadir 		= 1;
-		 			}
-		 			$hdr_ceil 	= ceil($hadir/$limit);
-		 			$no_antri 	= '<div class="widget-list-content">
-								<h4 class="widget-list-title" title="Nomor Antri">'.$limit-(($hdr_ceil*$limit)-$hadir).'</h4>
-							</div>';
-		 		}
-
 		 		$waktu 	= $this->Set->now_print();
-
 	 			$this->Query->insertData('pilkades_kehadiran', 
 	 																		array(
 	 																			'id_pemilih'			=> $accept_id,
-	 																			'antri'					=> $no_antri,
 	 																			'datetime_create'		=> $waktu,
 	 																			'id_uid'					=> $this->session->userdata('uid'),
 	 																		));
@@ -154,7 +174,6 @@ class Kehadiran extends CI_Controller {
 								<h4 class="widget-list-title">'. $data->nama_lengkap .'</h4>
 								<span class="text-muted">'. $alamat .'</span>
 							</div>
-							'. $no_antri .'
 							<div class="widget-list-action text-right">
 								<span class="bg-inverse text-white" title="Pukul Hadir">'.$time.'</span>
 							</div>

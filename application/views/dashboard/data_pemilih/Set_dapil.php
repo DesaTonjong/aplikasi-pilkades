@@ -15,8 +15,15 @@
 			<div class="form-group">
 				<label>Dapil</label>
 				<select class="form-control form-control-sm" name="id_dapil_new" >
-					<?php foreach ($dapil->result_array() as $key => $value) { ?>
-						<option <?php if($value['id']==$id_dapil){echo 'selected';}?> value="<?php echo $value['id'];?>"><?php echo $value['dapil'];?></option>
+					<?php 
+						foreach ($dapil->result_array() as $key => $value) { 
+							$get = $this->Query->select_where('data_pemilih', array('COUNT(id) as jml'), array('id_dapil'=> $value['id']),0,1, 'id ASC')->row();
+							$jml = '';
+							if($get->jml>0){
+								$jml = ' ('. number_format($get->jml).')';
+							}
+					?>
+						<option <?php if($value['id']==$id_dapil){echo 'selected';}?> value="<?php echo $value['id'];?>"><?php echo $value['dapil'] . ' ' . $jml;?></option>
 					<?php } ?>
 				</select>
 			</div>

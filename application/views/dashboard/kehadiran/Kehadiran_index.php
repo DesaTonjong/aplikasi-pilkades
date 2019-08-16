@@ -71,11 +71,6 @@
 								<h4 class="widget-list-title"><?php echo $value['nama_lengkap'];?></h4>
 								<span class="text-muted"><?php echo $value['dusun'] .' RT/RW : '. $value['rt'] .'/'. $value['rw'];?></span>
 							</div>
-							<?php if($cfg['antri']>0){ ?>
-								<div class="widget-list-content">
-									<h4 class="widget-list-title" title="Nomor Antri"><?php echo $value['antri'];?></h4>
-								</div>
-							<?php } ?>
 							<div class="widget-list-action text-right">
 								<span class="bg-inverse text-white" title="Pukul Hadir"><?php echo DATE_FORMAT(DATE_CREATE($value['datetime_create']),'h:i');?></span>
 							</div>

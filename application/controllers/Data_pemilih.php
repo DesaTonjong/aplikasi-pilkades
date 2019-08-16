@@ -186,7 +186,7 @@ class Data_pemilih extends CI_Controller {
 		$data['id_dusun'] 		= $this->input->get('id_dusun');
 		$data['rt'] 				= $this->input->get('rt');
 		$data['rw'] 				= $this->input->get('rw');
-		$data['dapil'] = $this->Query->select_where('pilkades_dapil', array('*'), array(), 0, 15, 'dapil ASC');
+		$data['dapil'] 			= $this->Query->select_where('pilkades_dapil', array('*'), array(), 0, 15, 'dapil ASC');
 		$this->load->view('dashboard/data_pemilih/Set_dapil', $data);
 	}
 
