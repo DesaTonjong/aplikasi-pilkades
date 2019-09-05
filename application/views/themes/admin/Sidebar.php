@@ -61,7 +61,7 @@
 					<?php } ?>
 				</ul>
 			</li>
-			<li class="has-sub <?php if($aktif=='data_pemilih' || $aktif=='opr_hitung' || $aktif=='set_hitung' || $aktif=='cek_hadir' || $aktif=='data_hadir'){ echo 'active';}?>">
+			<li class="has-sub <?php if($aktif=='data_pemilih' || $aktif=='set_hitung' || $aktif=='cek_hadir' || $aktif=='data_hadir'){ echo 'active';}?>">
 				<a href="javascript:;">
 					<b class="caret"></b>
 					<i class="fa fa-chart-pie"></i>
@@ -74,11 +74,11 @@
 					<?php if(isset($akses['adminpilkades'])) { ?>
 						<li class=" <?php if($aktif=='data_hadir'){ echo 'active';}?>"><a href="<?php echo $base_url_int. 'dashboard?p=data_hadir';?>">Data Kehadiran</a></li>
 					<?php } ?>
-					<?php if(isset($akses['oprpilkades'])) { ?>
+					<?php if(isset($akses['opr_pilkades'])) { ?>
 					<li class=" <?php if($aktif=='cek_hadir'){ echo 'active';}?>"><a href="<?php echo $base_url_int.'kehadiran';?>">Cek Kehadiran</a></li>
 					<?php } ?>
-					<?php if(isset($akses['oprhitung'])) { ?>
-					<li class=" <?php if($aktif=='opr_hitung'){ echo 'active';}?>"><a href="<?php echo $base_url_int.'dashboard?p=opr_hitung';?>">Penghitungan</a></li>
+					<?php if(isset($akses['dapil_phitung'])) { ?>
+					<li class=" <?php if($aktif=='set_hitung'){ echo 'active';}?>"><a href="<?php echo $base_url_int.'dashboard?p=set_hitung';?>">Penghitungan</a></li>
 					<?php } ?>
 				</ul>
 			</li>

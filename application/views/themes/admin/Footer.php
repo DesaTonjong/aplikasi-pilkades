@@ -47,6 +47,7 @@
 	<script src="<?php echo $base_url_int;?>assets/js/kehadiran.js"></script>
 <?php } ?>
 <?php if(isset($set_hitung)){  ?>
+	<script src="<?php echo $base_url_int;?>assets/js/jquery.number.js"></script>
 	<script src="<?php echo $base_url_int.$set_hitung;?>"></script>
 <?php } ?>
 <?php if(isset($rekap_hadir)){  ?>
@@ -57,6 +58,12 @@
 <?php } ?>
 <?php if(isset($set_cakades)){  ?>
 	<script src="<?php echo $base_url_int.$set_cakades;?>"></script>
+<?php } ?>
+<?php if(isset($panitia)){  ?>
+	<script src="<?php echo $base_url_int.$panitia;?>"></script>
+<?php } ?>
+<?php if(isset($kegiatan)){  ?>
+	<script src="<?php echo $base_url_int.$kegiatan;?>"></script>
 <?php } ?>
 </body>
 </html>

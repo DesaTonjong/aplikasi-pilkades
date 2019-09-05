@@ -18,7 +18,13 @@ var handleLoginPageChangeBackground = function() {
 			if(json.sts==true){
 				window.location.href = json.url;
 			}else{
-				var value = $("[name='"+ json.data.csrf.name +"']").val(json.data.csrf.hash);
+				Swal.fire({
+					title: 'Warning',
+					text: json.msg,
+					type: 'warning',
+					confirmButtonColor: '#3085d6',
+				});
+				// var value = $("[name='"+ json.data.csrf.name +"']").val(json.data.csrf.hash);
 			}
     		btn.html('Login');
 		},'json');

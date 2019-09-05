@@ -16,6 +16,7 @@ class Home extends CI_Controller {
 		);
 		$this->load->view('login', $data);
 	}
+	
 	public function login_validation()
 	{
 		$this->form_validation->set_rules('username', 'Username', 'required|trim');
@@ -26,6 +27,7 @@ class Home extends CI_Controller {
 
 			$email 			= $this->input->post('username');
 			$password 		= $this->input->post('password');
+			$data 			= array();
 			$user_check 	= $this->Query->select_where_join2('users', 'users_profile', 'users_profile.uid=users.uid',
 																array(
 																	'concat(users_profile.nama_depan," ", users_profile.nama_belakang) as username',
@@ -35,28 +37,36 @@ class Home extends CI_Controller {
 																	'users_profile.email'	=> $email,
 																),0,1, 'users.id ASC');
 			if($user_check->num_rows()>0){
-				$row 			= $user_check->row();
+				$row 		= $user_check->row();
 				$rules 		= explode(',', $row->rules_akses);
-
+				$akses 		= array();
 				foreach ($rules as $key => $value) {
 					if($value==3){
 						$akses['adminpilkades'] = 'Admin Pilkades';
 					}else if($value==4){
-						$akses['oprpilkades'] = 'Operator Pilkades';
+						$akses['opr_pilkades'] = 'Operator Pilkades';
 					}else if($value==5){
 						$uid_khadir = '';
-						$get 	= $this->Query->select_where('pilkades_dapil', array('id', 'uid_khadir'), array(),0,15, 'id ASC');
+						$uid_hitung = '';
+						$get 	= $this->Query->select_where('pilkades_dapil', array('id', 'uid', 'uid_khadir', 'uid_phitung'), array(),0,15, 'id ASC');
 						foreach ($get->result_array() as $key => $value) {
 							if($value['uid_khadir']!=""){
 								$uid_khadir = explode(',', $value['uid_khadir']);
 								for ($i=0; $i < COUNT($uid_khadir); $i++) { 
 									if($row->uid==$uid_khadir[$i]){
-										$akses['dapil_khadir'] = $value['id'];
+										$akses['dapil_khadir'] = array('id'=>$value['id'],'uid'=>$value['uid']);
+									}
+								}
+							}
+							if($value['uid_phitung']!=""){
+								$uid_hitung = explode(',', $value['uid_phitung']);
+								for ($i=0; $i < COUNT($uid_hitung); $i++) { 
+									if($row->uid==$uid_hitung[$i]){
+										$akses['dapil_phitung'] = array('id'=>$value['id'],'uid'=>$value['uid']);
 									}
 								}
 							}
 						}
-						$akses['oprkhadir'] = 'Operator Kehadiran';
 					}
 				}
 				

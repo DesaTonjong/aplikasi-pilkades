@@ -135,7 +135,7 @@ class Data_pemilih extends CI_Controller {
 											<label for="cssCheckbox1'. $value['id'] .'">'. $value['no_urut'] .'</label>
 										</div>
 								</td>
-								<td id="nama'. $value['id'] .'"><a href="#ModalFormMid" data-toggle="modal" onclick="get_pemilih('. $value['id'] .')"><b>'.$value['nama_lengkap'] .'</b><span class="pull-right">'. $value['lp'] .'</span><span class="text-black-transparent-7">'. $nik. '</span></a></td>
+								<td id="nama'. $value['id'] .'"><a href="#ModalFormMid" data-toggle="modal" onclick="get_pemilih('. $value['id'] .')"><b><span class="text-truncate">'.$value['nama_lengkap'] .'</span></b><span class="pull-right">'. $value['lp'] .'</span><span class="text-black-transparent-7">'. $nik. '</span></a></td>
 								<td id="dsn'. $value['id'] .'">'. $value['dusun'] .' '. $value['rt'] .'/'. $value['rw'] .'</td>
 								<td id="nkh'. $value['id'] .'">'. $value['sts_nkh'] .'</td>
 								</tr>';
@@ -575,6 +575,8 @@ class Data_pemilih extends CI_Controller {
 												'alamat_pemilih'	=> $default->alamat_pemilih,
 												'alamat_pemilih2'	=> $default->alamat_pemilih2,
 												'no_urut_bottom'	=> $default->no_urut_bottom,
+												'qr_code'			=> $default->qr_code,
+												'bar_code'			=> $default->bar_code,
 											));
 			$this->get_setup_print_und();
 		}
@@ -598,6 +600,11 @@ class Data_pemilih extends CI_Controller {
 		$this->form_validation->set_rules('no_urut_bottom_top','', 'required|trim|numeric');
 		$this->form_validation->set_rules('no_urut_bottom_left','', 'required|trim|numeric');
 		$this->form_validation->set_rules('no_urut_bottom_font_size','', 'required|trim|numeric');
+		$this->form_validation->set_rules('qr_code_top','', 'required|trim|numeric');
+		$this->form_validation->set_rules('qr_code_left','', 'required|trim|numeric');
+		$this->form_validation->set_rules('qr_code_top','', 'required|trim|numeric');
+		$this->form_validation->set_rules('bar_code_left','', 'required|trim|numeric');
+		$this->form_validation->set_rules('bar_code_top','', 'required|trim|numeric');
 
 		if($this->form_validation->run()==true){
 			$no_urut_top_top 				= $this->input->post('no_urut_top_top');
@@ -615,12 +622,18 @@ class Data_pemilih extends CI_Controller {
 			$no_urut_bottom_top 			= $this->input->post('no_urut_bottom_top');
 			$no_urut_bottom_left 		= $this->input->post('no_urut_bottom_left');
 			$no_urut_bottom_font_size 	= $this->input->post('no_urut_bottom_font_size');
+			$qr_code_top 					= $this->input->post('qr_code_top');
+			$qr_code_left 					= $this->input->post('qr_code_left');
+			$bar_code_left 				= $this->input->post('bar_code_left');
+			$bar_code_top 					= $this->input->post('bar_code_top');
 
 			$no_urut_top 				= $no_urut_top_top .','.$no_urut_top_left.','.$no_urut_top_font_size;
 			$nama_pemilih  			= $nama_pemilih_top .','.$nama_pemilih_left.','.$nama_pemilih_font_size;
 			$alamat_pemilih 			= $alamat_pemilih_top .','.$alamat_pemilih_left.','.$alamat_pemilih_font_size;
 			$alamat_pemilih2 			= $alamat_pemilih2_top .','.$alamat_pemilih2_left.','.$alamat_pemilih2_font_size;
 			$no_urut_bottom 			= $no_urut_bottom_top .','.$no_urut_bottom_left.','.$no_urut_bottom_font_size;
+			$qr_code 					= $qr_code_top .','.$qr_code_left;
+			$bar_code 					= $bar_code_top .','.$bar_code_left;
 
 			$this->Query->updateData('print_und_setup', 
 											array(
@@ -629,6 +642,8 @@ class Data_pemilih extends CI_Controller {
 													'alamat_pemilih' => $alamat_pemilih,
 													'alamat_pemilih2' => $alamat_pemilih2,
 													'no_urut_bottom' => $no_urut_bottom,
+													'qr_code' => $qr_code,
+													'bar_code' => $bar_code,
 													), 
 											array('uid_user'=> $this->session->userdata('uid')));
 			echo json_encode(array('sts'=> true));
@@ -890,11 +905,15 @@ class Data_pemilih extends CI_Controller {
 				if($akses==true){
 					$pemilih 	= $this->input->post('reset_data_pemilih');
 					$kehadiran 	= $this->input->post('reset_data_kehadiran');
+					$phitung 	= $this->input->post('reset_data_phitung');
 					if(isset($kehadiran)==true){
 						$this->Query->truncate_kehadiran('pilkades_kehadiran');
 					}
 					if(isset($pemilih)==true){
 						$this->Query->truncate_data_pemilih('data_pemilih');
+					}
+					if(isset($phitung)==true){
+						$this->Query->truncate_data_pemilih('pilkades_hitung_manual');
 					}
 					echo json_encode(array('sts'=> true, 'msg'=> 'Data berhasil dihapus'));
 				}else{

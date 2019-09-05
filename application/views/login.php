@@ -24,6 +24,7 @@
 	<link href="<?php echo $base_url_int;?>themes/css/default/style-responsive.min.css" rel="stylesheet" />
 	<link href="<?php echo $base_url_int;?>themes/css/default/theme/default.css" rel="stylesheet" id="theme" />
 	<script src="<?php echo $base_url_int;?>themes/plugins/pace/pace.min.js"></script>
+	<link href="<?php echo $base_url_int;?>themes/plugins/sweetalert/sweetalert2.min.css" rel="stylesheet" />
 </head>
 <body class="pace-top">
 	<div id="page-loader" class="fade show"><span class="spinner"></span></div>
@@ -76,6 +77,7 @@
 	<script src="<?php echo $base_url_int;?>themes/plugins/js-cookie/js.cookie.js"></script>
 	<script src="<?php echo $base_url_int;?>themes/js/theme/default.min.js"></script>
 	<script src="<?php echo $base_url_int;?>themes/js/apps.min.js"></script>
+	<script src="<?php echo base_url();?>themes/plugins/sweetalert/sweetalert2.min.js"></script>
 	<script src="<?php echo $base_url_int;?>themes/js/demo/login-v2.demo.js"></script>
 	<script>
 		$(document).ready(function() {

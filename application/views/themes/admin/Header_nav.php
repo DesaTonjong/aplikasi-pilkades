@@ -4,7 +4,7 @@
 ?>
 <div id="header" class="header navbar-inverse">
 	<div class="navbar-header">
-		<a href="<?php echo $base_url_int.'dashboard?p=dashboard';?>" class="navbar-brand"><span class="navbar-logo"></span> <b>APP</b> PILKADES <small>v.2.0.0</small></a>
+		<a href="<?php echo $base_url_int.'dashboard?p=dashboard';?>" class="navbar-brand"><span class="navbar-logo"></span> <b>APP</b> PILKADES <small>v.3.0.0</small></a>
 		<button type="button" class="navbar-toggle" data-click="sidebar-toggled">
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>

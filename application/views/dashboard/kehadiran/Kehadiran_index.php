@@ -1,7 +1,7 @@
 <?php 
 	$jml_segment 	= $this->uri->total_segments();
 	$base_url_int 	= $this->Cfg->int_uri($jml_segment);
-	$cfg 			= $this->Cfg->get_data();
+	$cfg 				= $this->Cfg->get_data();
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -43,7 +43,7 @@
 			<?php if(isset($dapil)){ ?>
 			<div class="login-header">
 				<div class="brand">
-					<span class="logo"></span> <b>PILKADES</b>  <?php echo strtoupper($dapil->dapil);?>
+					<span class="logo"></span> <b>PILKADES</b>  <?php echo substr(strtoupper($dapil->dapil),0,7);?>
 					<small><?php echo $cfg['sistem'] . ' '. ucwords(strtolower($cfg['desa'])) . ' Kec. '. ucwords(strtolower($cfg['kec']));?></small>
 				</div>
 				<div class="icon">

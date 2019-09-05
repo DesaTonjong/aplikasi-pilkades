@@ -48,12 +48,12 @@
 				}
 				if($page_active=='panitia'){
 					$scripts['dashboard'] 		= true;
-					$scripts['set_hitung'] 		= 'assets/js/panitia.js';
+					$scripts['panitia'] 		= 'assets/js/panitia.js';
 					$this->load->view('dashboard/panitia/Panitia_index.php');
 				}
 				if($page_active=='kegiatan'){
 					$scripts['dashboard'] 		= true;
-					$scripts['set_hitung'] 		= 'assets/js/kegiatan.js';
+					$scripts['kegiatan'] 		= 'assets/js/kegiatan.js';
 					$this->load->view('dashboard/kegiatan/Kegiatan_index.php');
 				}
 				if($page_active=='set_dapil'){

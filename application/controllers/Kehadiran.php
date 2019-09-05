@@ -15,11 +15,14 @@ class Kehadiran extends CI_Controller {
  	public function index()
  	{
  		$uid 					= $this->session->userdata('uid');
- 		$akses_khadir 		= $this->session->userdata('akses')['dapil_khadir']; 
+		$akses_khadir 		= $this->session->userdata('akses');
+		// echo '<pre>';
+		// print_r($akses_khadir);
+		// echo '</pre>';  
  		if(isset($akses_khadir)){ 
  		$data['dapil']		= $this->Query->select_where('pilkades_dapil', 
 													array('dapil'), 
-													array('id'=> $this->session->userdata('akses')['dapil_khadir']),0,1,'id ASC')->row();
+													array('id'=> $this->session->userdata('akses')['dapil_khadir']['id']),0,1,'id ASC')->row();
  		}
  		$data['kehadiran']	= $this->Query->select_where_join3('pilkades_kehadiran', 'data_pemilih', 'dusun', 
  															array(
@@ -38,7 +41,7 @@ class Kehadiran extends CI_Controller {
 		$this->form_validation->set_rules('key_search','Key Search', 'required|trim');
 		if($this->form_validation->run()==true){
 	 		$key_search 	= $this->input->post('key_search');
- 			$id_dapil 	= $this->session->userdata('akses')['dapil_khadir']; 
+ 			$id_dapil 	= $this->session->userdata('akses')['dapil_khadir']['id']; 
 
 	 		if(is_numeric($key_search)){
 	 			$get_cek 	= $this->Query->select_where_join2('data_pemilih', 'dusun', 
@@ -109,7 +112,7 @@ class Kehadiran extends CI_Controller {
  	{
 		$this->form_validation->set_rules('accept_id_ok','ID Pemilih', 'required|trim|numeric');
 		if($this->form_validation->run()==true){
- 			$id_dapil 	= $this->session->userdata('akses')['dapil_khadir']; 
+ 			$id_dapil 	= $this->session->userdata('akses')['dapil_khadir']['id']; 
 	 		$accept_id 	= $this->input->post('accept_id_ok');
 	 		$pemilih 	= $this->Query->select_where_join3('data_pemilih', 'pilkades_dapil', 'dusun', 
 	 														array(

@@ -17,6 +17,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div id="data_dapil"></div>
+				<span class="">Setiap user yang telah diset harus login ulang</span>
 			</div>
 		</div>
 	</div>

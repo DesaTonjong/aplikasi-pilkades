@@ -165,13 +165,13 @@
                         <?php } ?>
                         <?php if($cfg['bar_code']==1){ ?>
                             <div class="wrap_bar text-center" style="border-radius: 15px;">
-                                <?php echo '<b><span class="f-s-18 f-w-600 text-inverse">'. strtoupper('DAPIL 00'). '</span></b>';?>
+                                <?php echo '<b><span class="f-s-18 f-w-600 text-inverse">'. strtoupper('DAPIL 00'). '</span></b>';?><br>
                                 <img src="<?php echo $bar_code;?>">
                             </div>
                         <?php } ?>
 
                         <span class="no_urut_top text-inverse"><?php echo str_pad('0000', $cfg['dig_no_und'], "0", STR_PAD_LEFT);?></span>
-                        <span class="nama_pemilih text-inverse"><span class="f-s-16 f-w-300">Kepada yang terhormat:</span><br><?php echo strtoupper('Nama Pemilih').$nik;?></span>
+                        <span class="nama_pemilih text-inverse"><?php $und_yth= ($cfg['und_yth'])? '<span class="f-s-16 f-w-300">Kepada yang terhormat:</span><br>':''; echo $und_yth . strtoupper('NAMA PEMILIH').$nik;?></span>
                         <span class="alamat_pemilih"><?php echo 'Nama Dusun' . " RT/RW : ". '000'. "/" . '000';?></span>
                         <span class="alamat_pemilih2"><?php echo $cfg['sistem'] . ' '. ucwords(strtolower($cfg['desa'])) . ' - Kec. '. ucwords(strtolower($cfg['kec']));?></span>
                         <span class="no_urut_bottom"><?php echo str_pad('0000', $cfg['dig_no_und'], "0", STR_PAD_LEFT);?></span>

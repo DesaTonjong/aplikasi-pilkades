@@ -401,7 +401,10 @@ function print_undangan_tes() {
 $(document).on('submit', '#setting_print_und_save', function (e) {
 	e.preventDefault();
 	var form = $("#setting_print_und_save");
-	$.post(base_url + "data_pemilih/setting_print_und_save", form.serialize(), function (json) {}, 'json');
+	$("#btn_save").html('<i class="fa fa-spinner fa-spin text-center"></i>');
+	$.post(base_url + "data_pemilih/setting_print_und_save", form.serialize(), function (json) {
+		$("#btn_save").html('Simpan');
+	}, 'json');
 	return false;
 });
 

@@ -5,6 +5,8 @@
 	$alamat_pemilih 	= explode(',', $margin->alamat_pemilih);
 	$alamat_pemilih2 	= explode(',', $margin->alamat_pemilih2);
 	$no_urut_bottom 	= explode(',', $margin->no_urut_bottom);
+	$qr_code 			= explode(',', $margin->qr_code);
+	$bar_code 			= explode(',', $margin->bar_code);
 	$jml_segment 	= $this->uri->total_segments();
 	$base_url_int 	= $this->Cfg->int_uri($jml_segment);
 ?>
@@ -78,13 +80,31 @@
 							</div>
 						</div>
 					</div>
-
+					
+					<div class="form-group row">
+						<label class="col-md-3 offset-md-2 col-form-label">QR Code</label>
+						<div class="col-md-3">
+							<div class="input-group">
+								<input type="text" value="<?php echo $qr_code[1];?>" class="form-control" name="qr_code_left" title="Margin Samping" placeholder="Margin Samping">
+								<input type="text" value="<?php echo $qr_code[0];?>" class="form-control" name="qr_code_top" title="Margin Atas" placeholder="Margin Atas">
+							</div>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-md-3 offset-md-2 col-form-label">Barcode</label>
+						<div class="col-md-3">
+							<div class="input-group">
+								<input type="text" value="<?php echo $bar_code[1];?>" class="form-control" name="bar_code_left" title="Margin Samping" placeholder="Margin Samping">
+								<input type="text" value="<?php echo $bar_code[0];?>" class="form-control" name="bar_code_top" title="Margin Atas" placeholder="Margin Atas">
+							</div>
+						</div>
+					</div>
 			</div>
 
 			<div class="panel-footer panel_modal_footer">
 				<div class="col-md-7 offset-md-2">
 					<button type="submit" class="btn btn-sm btn-success" onclick="print_undangan_tes()">Tes Print</button>
-					<button type="submit" class="btn btn-sm btn-primary pull-right">Simpan</button>
+					<button type="submit" id="btn_save" class="btn btn-sm btn-primary pull-right">Simpan</button>
 				</div>
 			</div>
 		</div>

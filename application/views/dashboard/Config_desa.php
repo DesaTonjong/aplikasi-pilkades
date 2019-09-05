@@ -79,6 +79,10 @@
 					<input type="checkbox" name="reset_data_kehadiran" id="reset_data_kehadiran">
 					<label for="reset_data_kehadiran">Data Kehadiran</label>
 				</div>
+				<div class="checkbox checkbox-css">
+					<input type="checkbox" name="reset_data_phitung" id="reset_data_phitung">
+					<label for="reset_data_phitung">Data Penghitungan</label>
+				</div>
 
 			<div class="form-group m-b-15">
 				<label class="col-form-label">Password</label>
