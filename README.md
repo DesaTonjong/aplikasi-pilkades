@@ -2,6 +2,11 @@
 Aplikasi untuk memudahkan pengelolaan data pemilih berikut cek kehadiran pada gelar Pemilihan Kepala Desa (PILKADES),
 aplikasi client bisa diakses melalui Browser HP SmartPhone.
 
+Log v.3.0.0
+- Fitur Penghitungan
+- Setting Dapil dan User Operator
+- Menu Halaman Calon Kepala Desa
+
 log v.1.0.0
 - Data Pemilih
 - Upload
@@ -47,6 +52,7 @@ User Admin : admin@gmail.com
 Password : DesaMaju2019
 
 - Konsultasi https://web.facebook.com/jumari.kom.
+- Whatsapp 0821 3300 9900
 - Mau DONASI Dukung Pengembangan Aplikasi atau sekedar membelikan secangkir kopi.
 
 #BCA 317 0486 055
