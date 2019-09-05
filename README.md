@@ -2,10 +2,11 @@
 Aplikasi untuk memudahkan pengelolaan data pemilih berikut cek kehadiran pada gelar Pemilihan Kepala Desa (PILKADES),
 aplikasi client bisa diakses melalui Browser HP SmartPhone.
 
-Log v.3.0.0
+Log v.3.0.0 (05 September 2019)
 - Fitur Penghitungan
 - Setting Dapil dan User Operator
 - Menu Halaman Calon Kepala Desa
+- Print undangan menampilkan Barcode dan QR Code
 
 log v.1.0.0
 - Data Pemilih
