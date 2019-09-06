@@ -37,10 +37,10 @@ class Hitung_manual extends CI_Controller {
       $data['calon']    = $this->Query->select_where('pilkades_calon', 
                                  array('id','nomor', 'nama_calon', 'photo'), 
                                  array(), 0, 20, 'nomor ASC');
-      $data['tot_suara']   = $this->Query->select_where_group_by('pilkades_hitung_manual', 
-                                 array('count(id) as tot_suara'), 
+      $data['tot_suara']   = $this->Query->select_where_join2_group_by('pilkades_hitung_manual', 'pilkades_calon', 'pilkades_calon.id=pilkades_hitung_manual.id_cal',
+                                 array('count(pilkades_hitung_manual.id) as tot_suara'), 
                                  array(), 
-                                 array('id_dapil'=> $id_dapil), 0, 1, 'id ASC')->row();
+                                 array('pilkades_hitung_manual.id_dapil'=> $id_dapil), 0, 1, 'pilkades_hitung_manual.id ASC')->row();
       $result              = $this->load->view('dashboard/phitung/Get_data', $data, TRUE);
       echo json_encode(array('sts'=> TRUE, 'result'=> $result));
    }
