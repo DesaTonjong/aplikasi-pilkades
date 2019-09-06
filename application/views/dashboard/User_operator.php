@@ -36,7 +36,7 @@
 				?>
 				<tr id="row<?php echo $value['uid'];?>">
 					<td><?php echo $i;?></td>
-					<td><a href="javascript:void(0)" onclick="get_edit_user(<?php echo $value['uid'];?>)" id="user<?php echo $value['uid'];?>"><?php echo $value['nama_user'];?></a></td>
+					<td><a href="javascript:void(0)" onclick="get_edit_user('<?php echo $value['uid'];?>')" id="user<?php echo $value['uid'];?>"><?php echo $value['nama_user'];?></a></td>
 					<td id="mail<?php echo $value['uid'];?>"><?php echo $value['email'];?></td>
 					<td id="rule<?php echo $value['uid'];?>"><?php echo $rules;?></td>
 					<td id="pass<?php echo $value['uid'];?>"><button class="btn btn-info btn-xs" title="Reset Password" onclick="reset_pass(<?php echo $value['uid'];?>)"><i class="fa fa-redo"></i></button></td>

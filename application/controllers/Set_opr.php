@@ -69,7 +69,7 @@ class Set_opr extends CI_Controller {
 
 			$tr_row = '<tr id="row'. $uid .'">
 							<td>new</td>
-							<td><a href="javascript:void(0)" id="user" onclick="get_edit_user('. $uid .')">'. $nama_depan .' '. $nama_belakang .'</a></td>
+							<td><a href="javascript:void(0)" id="user" onclick="get_edit_user('."'". $uid ."'".')">'. $nama_depan .' '. $nama_belakang .'</a></td>
 							<td id="mail'. $uid .'">'. $email_login .'</td>
 							<td id="rule'. $uid .'">'. $akses .'</td>
 							<td id="pass'. $uid .'"><button class="btn btn-info btn-xs" title="Reset Password" onclick="reset_pass('. $uid .')"><i class="fa fa-redo"></i></button> <span class="pull-right">'.$password_login.'</span></td>

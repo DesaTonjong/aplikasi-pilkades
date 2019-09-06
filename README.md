@@ -3,7 +3,7 @@ Aplikasi untuk memudahkan pengelolaan data pemilih berikut cek kehadiran pada ge
 aplikasi client bisa diakses melalui Browser HP SmartPhone.
 
 Log v.3.0.0 (05 September 2019)
-- Fitur Penghitungan
+- Fitur Penghitungan, autorefresh
 - Setting Dapil dan User Operator
 - Menu Halaman Calon Kepala Desa
 - Print undangan menampilkan Barcode dan QR Code

@@ -1,18 +1,29 @@
 get_result();
 function get_result() {
-   $.get('./penghitungan/get_result', function(json){
+   $.get('./get_result', function(json){
+      var tot_global = json.tot_global;
       $.each( json.result, function( key, value ) {
-         var persen = 0;
-         if(json.dapil[value['id_dapil']]){
+         var persen  = 0;
+         if(json.dapil[value['id_dapil']]>0){
             persen = $.number((value['jml_suara']/json.dapil[value['id_dapil']])*100,1);
-            $("#rest"+ value['id_cal']+ value['id_dapil']).html(persen+"%");// style="width: 10%"
-            $("#rest"+ value['id_cal']+ value['id_dapil']).removeClass("d-none");// style="width: 10%"
+            $("#show_info"+ value['id_cal']+ value['id_dapil']).html(value['jml_suara'] + ' suara');// style="width: 10%"
+            $("#rest"+ value['id_cal']+ value['id_dapil']).html(persen);// style="width: 10%"
             $("#result"+ value['id_cal']+ value['id_dapil']).css('width', persen+"%");// style="width: 10%"
-            console.log('rest',value['id_cal']+ value['id_dapil']);
+            $("#result"+ value['id_cal']+ value['id_dapil']).attr('data-value="'+ persen +'%"');// style="width: 10%"
          }else{
-
+            $("#show_info"+ value['id_cal']+ value['id_dapil']).html('masing kosong');// style="width: 10%"
+            $("#rest"+ value['id_cal']+ value['id_dapil']).html('0');// style="width: 10%"
+            $("#result"+ value['id_cal']+ value['id_dapil']).css('width', "0%");// style="width: 10%"
+            $("#result"+ value['id_cal']+ value['id_dapil']).attr('data-value="0%"');// style="width: 10%"
          }
       });
+      $.each( json.per_cal, function( key, value ) {
+         var persen = $.number((value['jml_suara'] / tot_global) * 100,1);
+         $("#rest_tot"+ value['id_cal']).html(persen);// style="width: 10%"
+         $("#result_tot"+ value['id_cal']).css('width', persen+"%");// style="width: 10%"
+         $("#result_tot"+ value['id_cal']).attr('data-value="'+ persen +'%"');// style="width: 10%"
+         $("#show_info_tot"+ value['id_cal']).html(value['jml_suara'] + ' suara');
+      });  
    },'json');
 }
 
@@ -27,4 +38,5 @@ function countDown(){
       get_result();
    }
    console.log(n);
+   $("#second_n").html(n);
 }

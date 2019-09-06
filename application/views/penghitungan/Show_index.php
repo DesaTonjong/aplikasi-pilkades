@@ -62,7 +62,7 @@
          </div>
          <hr class="bg-black-transparent-2 m-t-2 m-b-2">
          <?php } ?>
-         <span class="row m-5">app pilkades ini dikembangkan oleh masjum.com</span>
+         <span class="col m-t-5">app pilkades ini dikembangkan oleh masjum.com <span class="pull-right">Data akan direfresh <span id="second_n">30</span> detik</span></span>
          </div>
       </div>
    </div>
@@ -91,6 +91,6 @@
 		});
    </script>
    <script src="<?php echo base_url();?>assets/js/jquery.number.js"></script>
-   <script src="<?php echo base_url();?>assets/js/dhitung2.js"></script>
+   <script src="<?php echo base_url();?>assets/js/d_hitung.js"></script>
 </body>
 </html>
