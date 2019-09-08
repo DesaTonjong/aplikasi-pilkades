@@ -1,6 +1,8 @@
 # Aplikasi PILKADES
 Aplikasi untuk memudahkan pengelolaan data pemilih berikut cek kehadiran pada gelar Pemilihan Kepala Desa (PILKADES),
 aplikasi client bisa diakses melalui Browser HP SmartPhone.
+Demo Aplikasi Pilkades https://pilkades.masjum.com/
+username dan password dibawah
 
 Log v.3.0.0 (05 September 2019)
 - Fitur Penghitungan, autorefresh
