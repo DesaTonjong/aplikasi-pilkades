@@ -29,7 +29,13 @@
             <div class="col-lg-3 col-md-5 col-xs-12">
                <div class="row">
                   <div class="col-3 p-10">
-                        <img src="<?php echo base_url('assets/img/user/c'. $value['nomor'] .'.png');?>" width="35px;">
+                        <img src="<?php 
+                                    $src = base_url('assets/img/user/c'. $value['nomor'] .'.png'); 
+                                    if($value['photo']!=""){
+                                       $src = base_url('assets/img/calon/80/'. $value['photo']); 
+                                    }
+                                    echo $src;
+                                    ?>" width="35px;">
                   </div>
                   <div class="col-9 p-10">
                      <div class="text-truncate"><?php echo $value['nomor'];?></div>

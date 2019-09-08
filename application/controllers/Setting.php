@@ -264,8 +264,12 @@ class Setting extends CI_Controller {
 		$cln 			= $this->Query->select_where('pilkades_calon', array('id','nomor', 'nama_calon', 'photo'), array(), 0,20, 'nomor ASC');
 		$list_calon	= '';
 		foreach ($cln->result_array() as $key => $value) {
+			$photo_calon = base_url('assets/img/user/c'. $value['nomor'] .'.png');
+			if($value['photo']!=""){
+				$photo_calon = base_url('assets/img/calon/200/'. $value['photo']);
+			}
 			$list_calon .='<li id="cakades'.$value['id'].'">
-								<a href="#ModalFormMid" data-toggle="modal" onclick="get_form_update_cakades('.$value['id'].')"><img src="'. base_url('assets/img/user/c'. $value['nomor'] .'.png') .'" alt=""></a>
+								<a href="#ModalForm" data-toggle="modal" onclick="get_form_update_cakades('.$value['id'].')"><img id="photo_cal'.$value['id'].'" src="'. $photo_calon .'" alt=""></a>
 								<h4 class="username text-ellipsis">
 									'.$value['nomor'].'
 									<small>'.$value['nama_calon'].'</small>
@@ -273,7 +277,7 @@ class Setting extends CI_Controller {
 							</li>';
 		}
 		$data_calon = '<h3>CAKADES <small>Calon Kepala Desa</small>
-		<a href="#ModalFormMid" data-toggle="modal" onclick="get_add_form_cakades()" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus"></i></a>
+		<a href="#ModalForm" data-toggle="modal" onclick="get_add_form_cakades()" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus"></i></a>
 		<a href="javascript:;" onclick="reload_dapil()" class="btn btn-success btn-sm pull-right m-r-5"><i class="fa fa-undo"></i></a>
 		</h3><ul class="registered-users-list clearfix row" id="cakades_list">'. $list_calon .'</ul>';
 		echo json_encode(array('sts'=> true, 'data_calon'=> $data_calon));
@@ -436,29 +440,106 @@ class Setting extends CI_Controller {
 			$pend_nama 		= $this->input->post('pend_nama');
 			$pend_thn 		= $this->input->post('pend_thn');
 			$nomor 			= $this->input->post('nomor');
+			
+			$photo_calon 	= base_url('assets/img/user/c'. $nomor .'.png');
 
-			$response 	= $this->Query->updateData('pilkades_calon', array(
-													'nama_calon'	=> $nama,
-													'gender' 		=> $gender,
-													'lahir_tmp' 	=> $lahir_tmp,
-													'lahir_tgl' 	=> $tanggal,
-													'pend_tingkat' => $pend_tingkat,
-													'pend_nama' 	=> $pend_nama,
-													'pend_thn' 		=> $pend_thn,
-													'nomor' 			=> $nomor,
-												), array(
-													'id'	=> $cakades_id,
-												));
+			$data_upd 			= array(
+										'nama_calon'	=> $nama,
+										'gender' 		=> $gender,
+										'lahir_tmp' 	=> $lahir_tmp,
+										'lahir_tgl' 	=> $tanggal,
+										'pend_tingkat' => $pend_tingkat,
+										'pend_nama' 	=> $pend_nama,
+										'pend_thn' 		=> $pend_thn,
+										'nomor' 			=> $nomor,
+									);
+
+			$config['upload_path']    = './assets/img/calon/';
+			$config['allowed_types']  = 'gif|jpg|png|jpeg';
+			$config['encrypt_name']   = TRUE;
+
+			$this->load->library('upload', $config);
+
+			if ($this->upload->do_upload('file'))
+			{
+				$data       = $this->upload->data();  
+				$this->load->library('image_lib');
+
+				$config = array(
+						'source_image'      => $data['full_path'],
+						'new_image'         => realpath(APPPATH.'../assets/img/calon/80/'),
+						'maintain_ratio'    => true,
+						'width'             => 80,
+						'height'            => 80
+						);
+							
+				$this->image_lib->initialize($config);
+				$this->image_lib->resize();
+
+				$config = array(
+						'source_image'      => $data['full_path'],
+						'new_image'         => realpath(APPPATH.'../assets/img/calon/200/'),
+						'maintain_ratio'    => true,
+						'width'             => 200,
+						'height'            => 200
+						);
+							
+				$this->image_lib->initialize($config);
+				$this->image_lib->resize();
+
+				$config = array(
+						'source_image'      => $data['full_path'],
+						'new_image'         => realpath(APPPATH.'../assets/img/calon/400/'),
+						'maintain_ratio'    => true,
+						'width'             => 400,
+						'height'            => 400
+						);
+							
+				$this->image_lib->initialize($config);
+				$this->image_lib->resize();
+
+				$config = array(
+						'source_image'      => $data['full_path'],
+						'new_image'         => realpath(APPPATH.'../assets/img/calon/800/'),
+						'maintain_ratio'    => true,
+						'width'             => 800,
+						'height'            => 800
+						);
+							
+				$this->image_lib->initialize($config);
+				$this->image_lib->resize();
+
+				$data_upd 	= array(
+										'nama_calon'	=> $nama,
+										'gender' 		=> $gender,
+										'lahir_tmp' 	=> $lahir_tmp,
+										'lahir_tgl' 	=> $tanggal,
+										'pend_tingkat' => $pend_tingkat,
+										'pend_nama' 	=> $pend_nama,
+										'pend_thn' 		=> $pend_thn,
+										'nomor' 			=> $nomor,
+										'photo' 			=> $data['file_name'],
+									);
+				$photo_calon 	= base_url('assets/img/calon/200/'.$data['file_name']);
+			}
+
+
+
+			$response 	= $this->Query->updateData('pilkades_calon', 
+																$data_upd, array(
+																	'id'	=> $cakades_id,
+																));
+
 			if($response==true){
-				$data 	= '<a href="#ModalFormMid" data-toggle="modal" onclick="get_form_update_cakades('.$cakades_id.')"><img src="'. base_url('assets/img/user/c'. $nomor .'.png') .'" alt=""></a>
+				$result 	= '<a href="#ModalFormMid" data-toggle="modal" onclick="get_form_update_cakades('.$cakades_id.')"><img src="'. $photo_calon .'" alt=""></a>
 								<h4 class="username text-ellipsis">
 									'.$nomor.'
 									<small>'.$nama.'</small>
 								</h4>';
-				echo json_encode(array('sts'=> true,'msg'=> 'Cakades berhasil disimpan', 'cakades_id'=> $cakades_id, 'cakades'=> $data));
+				echo json_encode(array('sts'=> true, 'msg'=> 'Cakades berhasil disimpan', 'cakades_id'=> $cakades_id, 'photo'=> $photo_calon, 'cakades'=> $result));
 			}
 		}else{
-			echo json_encode(array('sts'=> false,'msg'=> validation_errors()));
+			echo json_encode(array('sts'=> false, 'msg'=> validation_errors()));
 		}
 	}
 

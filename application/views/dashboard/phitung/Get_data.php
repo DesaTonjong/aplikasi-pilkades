@@ -16,12 +16,17 @@ foreach ($calon->result_array() as $key => $value) {
       $persen = number_format(($get->jml/$tot_suara->tot_suara)*100,1);
       }
    }
+   $src = base_url('assets/img/user/c'. $value['nomor'] .'.png'); 
+   if($value['photo']!=""){
+      $src = base_url('assets/img/calon/80/'. $value['photo']); 
+   }
+      $src;
    $list_calon .='<div id="cakades'.$value['id'].'" class="col-lg-6">
                   <div class="card border-0 bg-dark text-white text-white">
                      <div class="row align-items-center p-5">
 								<div class="col-3">
 									<div class="height-100 d-flex ">
-                              <img src="'. base_url('assets/img/user/c'. $value['nomor'] .'.png') .'" class="mw-100 mh-100 rounded" alt="">
+                              <img src="'. $src .'" class="mw-100 mh-100 rounded" alt="">
 									</div>
 								</div>
 								<div class="col-9">

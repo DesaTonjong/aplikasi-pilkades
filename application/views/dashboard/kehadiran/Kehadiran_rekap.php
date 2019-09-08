@@ -18,16 +18,16 @@
 	<div class="panel-body panel_data_body">
 		<div class="row">
 			<div class="col-lg-6 col-md-12">
-					<?php foreach ($dusun as $key => $value) { 
-							$rekap				= $this->Query->select_where_join2_group_by('data_pemilih', 'dusun', 'dusun.uid=data_pemilih.id_dusun', 
-				                                        array('data_pemilih.rw', 
-				                                        	'SUM(IF(data_pemilih.lp=1,1,0)) as jml_lk',
-				                                        	'SUM(IF(data_pemilih.lp=2,1,0)) as jml_pr',
-				                                        	'COUNT(data_pemilih.id) as jumlah',
-				                                        ),
-				                                        array('dusun.dusun', 'data_pemilih.rw'),
-				                                        'data_pemilih.aktif=1 AND data_pemilih.id_dusun='.$value['uid'],
-				                                        0, 60, 'data_pemilih.id_dusun, data_pemilih.rw ASC')->result_array();
+					<?php foreach ($dapil as $key => $value) { 
+							$rekap	= $this->Query->select_where_join2_group_by('data_pemilih', 'pilkades_dapil', 'pilkades_dapil.id=data_pemilih.id_dapil', 
+													array('data_pemilih.rw', 
+													'SUM(IF(data_pemilih.lp=1,1,0)) as jml_lk',
+													'SUM(IF(data_pemilih.lp=2,1,0)) as jml_pr',
+													'COUNT(data_pemilih.id) as jumlah',
+													),
+													array('pilkades_dapil.dapil', 'data_pemilih.rw'),
+													'data_pemilih.aktif=1 AND data_pemilih.id_dapil='.$value['id'],
+													0, 60, 'data_pemilih.id_dapil, data_pemilih.rw ASC')->result_array();
 							$tot_lk			= 0;
 							$tot_pr			= 0;
 							$tot_jml			= 0;
@@ -41,11 +41,11 @@
 							$pros_jml_hdr	= 0;
 							if(count($rekap)>0){
 					?>
-				<h3><?php echo $value['dusun'];?></h3>
+				<h3><?php echo $value['dapil'];?></h3>
 				<table class="table table-striped table-bordered">
 					<thead>
 						<tr>
-							<th rowspan="2" class="align-middle text-center">DUSUN</th>
+							<th rowspan="2" class="align-middle text-center">RW/RT</th>
 							<th colspan="3" class="text-center">DATA PEMILIH</th>
 							<th colspan="4" class="text-center">DATA KEHADIRAN</th>
 						</tr>
@@ -133,7 +133,7 @@
 				<table class="table table-striped table-bordered">
 					<thead>
 						<tr>
-							<th rowspan="2" class="align-middle text-center">DUSUN</th>
+							<th rowspan="2" class="align-middle text-center">DAPIL</th>
 							<th colspan="3" class="text-center">DATA PEMILIH</th>
 							<th colspan="4" class="text-center">DATA KEHADIRAN</th>
 						</tr>
@@ -161,16 +161,16 @@
 							$pros_pr_hdr	= 0;
 							$pros_jml_hdr	= 0;
 
-							foreach ($dusun as $key => $value) { 
-							$rekap				= $this->Query->select_where_join2_group_by('data_pemilih', 'dusun', 'dusun.uid=data_pemilih.id_dusun', 
-				                                        array('dusun.dusun', 
+							foreach ($dapil as $key => $value) { 
+							$rekap				= $this->Query->select_where_join2_group_by('data_pemilih', 'pilkades_dapil', 'pilkades_dapil.id=data_pemilih.id_dapil', 
+				                                        array('pilkades_dapil.dapil', 
 				                                        	'SUM(IF(data_pemilih.lp=1,1,0)) as jml_lk',
 				                                        	'SUM(IF(data_pemilih.lp=2,1,0)) as jml_pr',
 				                                        	'COUNT(data_pemilih.id) as jumlah',
 				                                        ),
-				                                        array('dusun.dusun'),
-				                                        'data_pemilih.aktif=1 AND data_pemilih.id_dusun='.$value['uid'],
-				                                        0, 60, 'data_pemilih.id_dusun, data_pemilih.rw ASC')->result_array();
+				                                        array('pilkades_dapil.dapil'),
+				                                        'data_pemilih.aktif=1 AND data_pemilih.id_dapil='.$value['uid'],
+				                                        0, 60, 'data_pemilih.id_dapil, data_pemilih.rw ASC')->result_array();
 
 							if(count($rekap)>0){
 					 			foreach ($rekap as $ey => $row) { 
@@ -217,7 +217,7 @@
 									}
 							   ?>
 								<tr>
-									<td>&nbsp;&nbsp;<?php echo $row['dusun'];?></td>
+									<td>&nbsp;&nbsp;<?php echo $row['dapil'];?></td>
 									<td class="text-right"><?php echo $row['jml_lk'];?></td>
 									<td class="text-right"><?php echo $row['jml_pr'];?></td>
 									<td class="text-right"><?php echo $row['jumlah'];?></td>

@@ -54,7 +54,7 @@
 			</div>
 			<div class="col-lg-9">
 				<a href="<?php echo base_url('penghitungan/show');?>" class="pull-right" target="_blank">Penghitungan Keseluruhan <i class="fa fa-md fa-angle-double-right"></i></a><div class="clearfix"></div>
-			<div id="data_perolehan" class="m-t-10"></div>
+				<div id="data_perolehan" class="m-t-10"></div>
 			</div>
 		</div>
 	</div>

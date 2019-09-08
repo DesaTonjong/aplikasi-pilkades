@@ -31,8 +31,8 @@
 				if($page_active=='data_hadir'){
 					$scripts['dashboard'] 		= true;
 					$scripts['rekap_hadir'] 	= 'assets/js/rekap_hadir.js';
-					$dbase['dusun']				= $this->Query->select_where('dusun', array('*'), array(),0,20, 'uid ASC')->result_array();
-					$dbase['rt']					= $this->Query->select_where_group_by('data_pemilih', array('rt'), array('rt'), array('id_dusun'=>$dbase['dusun'][0]['uid']),0,20, 'rt ASC')->result_array();
+					$dbase['dapil']				= $this->Query->select_where('pilkades_dapil', array('*'), array(),0,20, 'dapil ASC')->result_array();
+					$dbase['rt']					= $this->Query->select_where_group_by('data_pemilih', array('rt'), array('rt'), array('id_dapil'=>$dbase['dapil'][0]['id']),0,20, 'rt ASC')->result_array();
 					$dbase['pemilih']				= $this->Query->select_where('data_pemilih', array('COUNT(id) as jml'), array(),0,1, 'id ASC')->row();
 					$this->load->view('dashboard/kehadiran/Kehadiran_rekap', $dbase);
 				}

@@ -37,32 +37,36 @@ $(document).on('submit', '#form_add_cakades', function (e) {
 function get_form_update_cakades(cakades_id) {
 	if(parseInt(cakades_id)>1){
 		$.get(base_url+"setting/get_form_update_cakades", {'cakades_id': cakades_id}, function(data){
-			$("#data_content_mid").html(data);
+			$("#data_content").html(data);
 		});
 	}else{
 		$("#data_content_mid").html('Data tidak bisa diedit');
 	}
 }
 
-$(document).on('submit', '#form_update_cakades', function (e) {
-	e.preventDefault();
-	var form = $("#form_update_cakades");
+$(document).on('submit', '#form_update_cakades', function (es) {
+	es.preventDefault();
+	var form_attr = $("#form_update_cakades");
+	var form = $('#form_update_cakades')[0];;
+	var data = new FormData(form);
 	var btn 	= $("#btn_upd_cakades");
 	btn.html('<i class="fa fa-spinner fa-spin text-center"></i>');
-	$.post(form.attr('action'), form.serialize(), function (json) {
-		if (json.sts == true) {
-			$("#cakades"+json.cakades_id).html(json.cakades);
-			$("#ModalFormMid").modal('hide');
-		}else{
-			Swal.fire({
-				title: 'Periksa kesalahan error',
-				text: json.msg,
-				type: 'warning',
-				confirmButtonColor: '#3085d6',
-			});
-		}
-		btn.html('Simpan');
-	}, 'json');
+	$.ajax({
+      type: "POST",
+      enctype: 'multipart/form-data',
+      url: form_attr.attr('action'),
+      data: data,
+      processData: false,
+      contentType: false,
+      cache: false,
+      timeout: 600000,
+      success: function (data) {
+			get_data();
+			$("#ModalForm").modal('hide');
+			btn.html('Simpan');
+      }
+	  });
+	  
 	return false;
 });
 
@@ -86,3 +90,15 @@ function remove_cakades(cakades_id) {
 				}
 	});
 }
+
+
+
+function previewImage() {
+	document.getElementById("image-preview").style.display = "block";
+	var oFReader = new FileReader();
+	 oFReader.readAsDataURL(document.getElementById("image-source").files[0]);
+
+	oFReader.onload = function(oFREvent) {
+	  document.getElementById("image-preview").src = oFREvent.target.result;
+	};
+};

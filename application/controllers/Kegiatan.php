@@ -36,9 +36,9 @@ class Kegiatan extends CI_Controller {
 		$this->form_validation->set_rules('keterangan','Keterangan', 'required|trim');
 
 		if($this->form_validation->run()==true){
-			$config['upload_path']          = './assets/img/kegiatan/';
-	      $config['allowed_types']        = 'gif|jpg|png|jpeg';
-	      $config['encrypt_name']         = TRUE;
+			$config['upload_path']    = './assets/img/kegiatan/';
+	      $config['allowed_types']  = 'gif|jpg|png|jpeg';
+	      $config['encrypt_name']   = TRUE;
 
 	      $this->load->library('upload', $config);
 
