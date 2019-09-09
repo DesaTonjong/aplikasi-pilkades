@@ -20,6 +20,7 @@ application/logs/*
 !application/logs/.htaccess
 sftp-config.json
 .gitignore
+.DS_Store
 /.vscode/
 
 ### CodeIgniter Patch ###
