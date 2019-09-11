@@ -76,7 +76,7 @@
 				                                        	'COUNT(data_pemilih.id) as jumlah',
 				                                        ),
 				                                        array('dusun.dusun', 'data_pemilih.rw'),
-				                                        'data_pemilih.aktif=1 AND data_pemilih.id_dusun='.$value['uid'] . ' AND data_pemilih.rw='.$row['rw'],
+				                                        'data_pemilih.aktif=1 AND data_pemilih.id_dapil='.$value['id'] . ' AND data_pemilih.rw='.$row['rw'],
 				                                        0, 60, 'data_pemilih.id_dusun, data_pemilih.rw ASC');
 
 							$hdr_lk 	= 0; 
@@ -169,7 +169,7 @@
 				                                        	'COUNT(data_pemilih.id) as jumlah',
 				                                        ),
 				                                        array('pilkades_dapil.dapil'),
-				                                        'data_pemilih.aktif=1 AND data_pemilih.id_dapil='.$value['uid'],
+				                                        'data_pemilih.aktif=1 AND data_pemilih.id_dapil='.$value['id'],
 				                                        0, 60, 'data_pemilih.id_dapil, data_pemilih.rw ASC')->result_array();
 
 							if(count($rekap)>0){
@@ -189,7 +189,7 @@
 						                                        	'COUNT(data_pemilih.id) as jumlah',
 						                                        ),
 						                                        array('dusun.dusun'),
-						                                        'data_pemilih.aktif=1 AND data_pemilih.id_dusun='.$value['uid'],
+						                                        'data_pemilih.aktif=1 AND data_pemilih.id_dapil='.$value['id'],
 						                                        0, 60, 'data_pemilih.id_dusun ASC');
 
 									$hdr_lk 	= ''; 
