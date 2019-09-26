@@ -22,6 +22,7 @@ sftp-config.json
 .gitignore
 .DS_Store
 /.vscode/
+/vendor/
 
 ### CodeIgniter Patch ###
 

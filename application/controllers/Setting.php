@@ -246,15 +246,19 @@ class Setting extends CI_Controller {
 			}else{
 				$uid 	= $uid_user;
 			}
+
+			$msg = '';
 			
 			if($jns==1){
 				$upd = $this->db->Query('UPDATE pilkades_dapil set uid_khadir="'. $uid .'" WHERE id='.$id_dapil);
+				$msg = 'user kehadiran sukses';
 			}else if($jns==2){
 				$upd = $this->db->Query('UPDATE pilkades_dapil set uid_phitung="'. $uid .'" WHERE id='.$id_dapil);
+				$msg = 'user penghitungan sukses';
 			}
 			if($upd==true){
 				$user = '<span class="badge badge-success m-r-5" id="user'. $jns . $id_dapil . $uid_user .'">' . $user .' <a href="javascript:;" title="Hapus User ' . $user .'" class="text-white" onclick="remove_user('. $jns .','.$id_dapil .','. $uid_user .')"><i class="fa fa-times"></i></a></span>';
-				echo json_encode(array('sts'=> true, 'jns'=> $jns, 'id_dapil'=> $id_dapil, 'user'=> $user));
+				echo json_encode(array('sts'=> true, 'jns'=> $jns, 'id_dapil'=> $id_dapil, 'user'=> $user, 'msg'=> $msg));
 			}
 		}
 	}
