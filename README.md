@@ -54,9 +54,8 @@ Login
 User Admin : admin@gmail.com
 Password : DesaMaju2019
 
-- Konsultasi https://web.facebook.com/jumari.kom.
-- Whatsapp 0821 3300 9900
-- Mau DONASI Dukung Pengembangan Aplikasi atau sekedar membelikan secangkir kopi.
+DONASI Dukung Pengembangan Aplikasi, 
+silakan sisihkan dana anda (Rp. 500.000) ke rekening berikut.
 
 #BCA 317 0486 055
 a/n JUMARI
@@ -65,4 +64,5 @@ a/n JUMARI
 0981 31200 94
 a/n JUMARI
 
+Setiap donatur akan mendapatkan support pendampingan berikut konsultasi sampai dgn pilkades selesai.
 Terima kasih
