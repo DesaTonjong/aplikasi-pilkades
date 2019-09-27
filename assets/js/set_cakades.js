@@ -8,7 +8,7 @@ function get_data() {
 
 function get_add_form_cakades() {
 	$.get(base_url+"setting/get_add_form_cakades", function(data){
-		$("#data_content_mid").html(data);
+		$("#data_content").html(data);
 	});
 }
 
@@ -40,7 +40,7 @@ function get_form_update_cakades(cakades_id) {
 			$("#data_content").html(data);
 		});
 	}else{
-		$("#data_content_mid").html('Data tidak bisa diedit');
+		$("#data_content").html('Data tidak bisa diedit');
 	}
 }
 

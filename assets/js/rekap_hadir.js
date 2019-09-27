@@ -5,7 +5,7 @@ function get_rekap_hadir(rw) {
 }
 
 function remove_hadir(id_hadir) {
-   swal({
+  Swal.fire({
        title: "Apakah anda yakin?",
        text: "akan menghapus kehadiran saudara : "+ $("#und"+id_hadir).html()+", "+ $("#pemilih"+id_hadir).html() +" ..?",
        icon: "warning",
@@ -17,11 +17,11 @@ function remove_hadir(id_hadir) {
 				$.post(base_url+"data_pemilih/remove_hadir", {'id_hadir':id_hadir},function(json){
 					if(json.sts==true){
 						$("#hadir"+id_hadir).fadeOut();
-						swal($("#und"+id_hadir).html()+", "+ $("#pemilih"+id_hadir).html() + " berhasil dihapus");
+						Swal.fire($("#und"+id_hadir).html()+", "+ $("#pemilih"+id_hadir).html() + " berhasil dihapus");
 					}
 				},'json');
          } else {
-                swal("Penghapusan dibatalkan");
+          Swal.fire("Penghapusan dibatalkan");
      }
   });
 }

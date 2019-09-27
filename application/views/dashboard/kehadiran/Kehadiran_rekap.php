@@ -45,7 +45,7 @@
 				<table class="table table-striped table-bordered">
 					<thead>
 						<tr>
-							<th rowspan="2" class="align-middle text-center">RW/RT</th>
+							<th rowspan="2" class="align-middle text-center">RW</th>
 							<th colspan="3" class="text-center">DATA PEMILIH</th>
 							<th colspan="4" class="text-center">DATA KEHADIRAN</th>
 						</tr>
@@ -98,8 +98,12 @@
 							$tot_pr_hdr		= $tot_pr_hdr + $hdr_pr;
 							$tot_jml_hdr	= $tot_jml_hdr + $jumlah;
 
-							$pros_lk 		= number_format(($hdr_lk/$row['jml_lk'])*100,2).' %'; 
+							if($row['jml_lk']>0){ 
+							$pros_lk 		= number_format(($hdr_lk/$row['jml_lk'])*100,2).' %';
+							}
+							if($row['jml_pr']) {
 							$pros_pr 		= number_format(($hdr_pr/$row['jml_pr'])*100,2).' %'; 
+							}
 							$pros_jumlah 	= '<a href="#ModalForm" data-toggle="modal" onclick="get_rekap_hadir('."'".$row['rw']."'".')" class="text-white">'.number_format(($jumlah/$row['jumlah'])*100,2).' %</a>'; 
 						}
 				   ?>
