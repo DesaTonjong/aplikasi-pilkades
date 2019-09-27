@@ -64,5 +64,8 @@ a/n JUMARI
 0981 31200 94
 a/n JUMARI
 
-Setiap donatur akan mendapatkan support pendampingan berikut konsultasi sampai dgn pilkades selesai.
+Setiap donatur akan mendapatkan support pendampingan berikut konsultasi secara khusus sampai dgn pilkades selesai.
+- Konsultasi https://web.facebook.com/jumari.kom.
+- Whatsapp 0821 3300 9900
+
 Terima kasih
